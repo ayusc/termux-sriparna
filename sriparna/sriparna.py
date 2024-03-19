@@ -19,7 +19,6 @@ g4f.debug.logging = False
 
 client = Client(provider=RetryProvider([ChatgptAi, OpenaiChat, Bing], shuffle=False))
 
-
 def load_app_mappings(filename):
     if os.path.exists(filename):
         with open(filename, "r") as f:
@@ -27,8 +26,14 @@ def load_app_mappings(filename):
     else:
         return {}
 
+python_version = "{}.{}".format(sys.version_info.major, sys.version_info.minor)
+appjson_path = "/data/data/com.termux/files/usr/lib/python{}/site-packages/sriparna/apps.json".format(python_version)
 
-app_mappings = load_app_mappings("apps.json")
+# Check if the given path exists, if not, fallback to using "apps.json"
+if os.path.exists(appjson_path):
+    app_mappings = load_app_mappings(appjson_path)
+else:
+    app_mappings = load_app_mappings("apps.json")
 
 # Generate random 5-character strings for input and output file paths
 random_chars = "".join(
