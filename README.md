@@ -98,7 +98,7 @@ You can open chrome, gmail, youtube with this, if you want more applications you
 
 You can use [Shortcut Maker](https://play.google.com/store/apps/details?id=rk.android.app.shortcutmaker) to find package name and package names of installed applications.
 
-For pypi installation: You can directly edit the apps.json file with `sed -i "s/pythonx.y/python$(python -c 'import sys; print(sys.version_info[0])').$(python -c 'import sys; print(sys.version_info[1])')/g" /data/data/com.termux/files/usr/lib/python$(python -c 'import sys; print(sys.version_info[0])').$(python -c 'import sys; print(sys.version_info[1])')/site-packages/sriparna/apps.json && vi /data/data/com.termux/files/usr/lib/python$(python -c 'import sys; print(sys.version_info[0])').$(python -c 'import sys; print(sys.version_info[1])')/site-packages/sriparna/apps.json
+For pypi installation: You can directly edit the apps.json file with `vi /data/data/com.termux/files/usr/lib/python$(python -c 'import sys; print(sys.version_info[0])').$(python -c 'import sys; print(sys.version_info[1])')/site-packages/sriparna/apps.json
 `
 
 ##### To check the current weather conditions you can "hi sriparna whats the weather alike", "tell me the weather forecast", "what is the current weather condition", "how is the weather today"
