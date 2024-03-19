@@ -4,7 +4,7 @@ pkg update &>/dev/null && pkg upgrade -y &>/dev/null
 
 # Workaround to check for Termux Api App Installation 
 if timeout 5 termux-toast "Working ..." &>/dev/null; then
-        echo "Termux API app is already installed."
+        echo -e "\nTermux API app is already installed.\n"
 else
         echo "Termux API app is not installed."
         # Open F-Droid link
