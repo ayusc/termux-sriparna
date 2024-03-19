@@ -1,0 +1,12 @@
+LICENSE
+README.md
+setup.py
+sriparna/__init__.py
+sriparna/apps.json
+sriparna/sriparna.py
+termux_sriparna.egg-info/PKG-INFO
+termux_sriparna.egg-info/SOURCES.txt
+termux_sriparna.egg-info/dependency_links.txt
+termux_sriparna.egg-info/entry_points.txt
+termux_sriparna.egg-info/requires.txt
+termux_sriparna.egg-info/top_level.txt

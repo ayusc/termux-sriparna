@@ -1,0 +1,6 @@
+{
+    "Chrome": "com.android.chrome/com.google.android.apps.chrome.Main",
+    "YouTube": "com.google.android.youtube/com.google.android.youtube.app.honeycomb.Shell$HomeActivity",
+    "Gmail": "com.google.android.gm/com.google.android.gm.ConversationListActivityGmail",
+    "Whatsapp": "com.whatsapp/com.whatsapp.Main"
+}
