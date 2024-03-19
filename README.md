@@ -107,4 +107,6 @@ For pypi installation: You can directly edit the apps.json file with `vi /data/d
 ##### To know current date and time you can say "what is(or what's) the time", "what is today's date", "what date is today"
 
 # Credits
-Thanks to Slash Mark IT for the project idea.
+[xtekky](https://github.com/xtekky) for [g4f](https://github.com/xtekky/gpt4free)
+
+Slash Mark IT for the project idea.
