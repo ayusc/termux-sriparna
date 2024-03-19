@@ -8,7 +8,7 @@ With sriparna you can:
 3) Send messages ❌
 4) Open any app ✅
 5) Check whether ✅
-6) See current date and time ❌
+6) See current date and time ✅
 7) See live location (with google maps link) ❌
 8) Read call logs ❌
 9) Perform any search ✅
