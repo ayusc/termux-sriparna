@@ -96,14 +96,14 @@ Note: In certain cases the speech recognition may not correctly identify the con
 
 You can open chrome, gmail, youtube with this, if you want more applications you need to specify their package names and class name in app.json
 
-You can use [Shortcut Maker](https://play.google.com/store/apps/details?id=rk.android.app.shortcutmaker) to find package name and package names of installed applications.
+You can use [Shortcut Maker](https://play.google.com/store/apps/details?id=rk.android.app.shortcutmaker) to find package name and class names of installed applications.
 
 For pypi installation: You can directly edit the apps.json file with `vi /data/data/com.termux/files/usr/lib/python$(python -c 'import sys; print(sys.version_info[0])').$(python -c 'import sys; print(sys.version_info[1])')/site-packages/sriparna/apps.json
 `
 
 ##### To check the current weather conditions you can "hi sriparna whats the weather alike", "tell me the weather forecast", "what is the current weather condition", "how is the weather today"
 
-##### To turn on flashlight you can say "hey please turn on the flash", "flash on", similarly you can say "hey please turn off the flash", "flash off" to turn it off.
+##### To turn on flashlight you can say "hey please turn on the flash/torch", "flash/torch on", similarly you can say "hey please turn off the flash/torch", "flash/torch off" to turn it off.
 
 ##### To know current date and time you can say "what is(or what's) the time", "what is today's date", "what date is today"
 
