@@ -202,10 +202,10 @@ def voice_assistant(text):
                 return f"Calling {name}"
         return f"No contact found with name {name}"
 
-    if "flash on" in text.lower() or "on the flash" in text.lower():
+    if "flash on" in text.lower() or "torch on" in text.lower() or "on the flash" in text.lower() or "on the torch" in text.lower():
         subprocess.run(["termux-torch", "on"])
         return "Flashlight turned on."
-    elif "flash off" in text.lower() or "off the flash" in text.lower():
+    elif "flash off" in text.lower()  or "torch off" in text.lower() or "off the flash" in text.lower() or "off the torch" in text.lower():
         subprocess.run(["termux-torch", "off"])
         return "Flashlight turned off."
 
