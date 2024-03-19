@@ -211,22 +211,50 @@ def voice_assistant(text):
         subprocess.run(["termux-torch", "off"])
         return "Flashlight turned off."
 
-    # Check if the text contains any mention of checking battery status
+    # Check if the text contains any queries regarding current time
     if any(
         keyword in text.lower()
         for keyword in [
-            "battery percentage",
-            "battery status",
-            "battery health",
-            "my battery",
+            "what is the time",
+            "what's the time",
+            "time now",
+            "current time",
+            "what time",
         ]
     ):
         # Get local time zone
-        local_timezone = tz.tzlocal()
-        current_time = datetime.now(local_timezone).strftime('%H:%M:%S')  # Format the current time as desired
-        return current_time
+        local_timezone = tz.tzlocal()       
+        # Get current time
+        current_time = datetime.now(local_timezone)
+        # Format the current time 
+        formatted_time = current_time.strftime("It is %I:%M:%S %p")
+        return formatted_time
+        
     else:
-        return "Sorry, I couldn't fetch the local time."
+        return "Sorry, I couldn't fetch the local time." 
+
+    if any(
+        keyword in text.lower()
+        for keyword in [
+            "what is the date",
+            "what's the date",
+            "date today",
+            "today's date",
+            "what day",
+            "which day"
+        ]     
+    ):
+        # Get local time zone
+        local_timezone = tz.tzlocal()       
+        # Get current time
+        current_time = datetime.now(local_timezone)
+        # Format the current date 
+        formatted_date = current_time.strftime("Today's date is: %B %d, %Y (%A)")
+        return formatted_date
+        
+    else:
+        return "Sorry, I couldn't fetch the local time." 
+    
     # Check if the text contains any type of query asking about the current weather conditions
     if any(
         keyword in text.lower()
@@ -235,7 +263,7 @@ def voice_assistant(text):
             "weather conditions",
             "current weather",
             "weather forecast",
-            "is the weather",
+            "how is the weather",
         ]
     ):
         try:
