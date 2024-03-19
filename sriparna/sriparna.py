@@ -253,7 +253,7 @@ def voice_assistant(text):
         return formatted_date
         
     else:
-        return "Sorry, I couldn't fetch the local time." 
+        return "Sorry, I couldn't fetch the local date." 
     
     # Check if the text contains any type of query asking about the current weather conditions
     if any(
