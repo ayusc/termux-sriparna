@@ -216,10 +216,9 @@ def voice_assistant(text):
         ]
     ):
         try:
-            # Fetch GPS coordinates with a timeout of 5 seconds
+            # Fetch GPS coordinates 
             gps_output = subprocess.check_output(
-                ["termux-location", "-p", "gps"], timeout=20
-            ).decode("utf-8")
+                ["termux-location", "-p", "gps"]).decode("utf-8")
             gps_json = json.loads(gps_output)
             latitude = gps_json.get("latitude")
             longitude = gps_json.get("longitude")
@@ -241,7 +240,6 @@ def voice_assistant(text):
             for char in response:
                 print(char, end="", flush=True)
                 time.sleep(0.05)
-
 
 def main():
     while True:
