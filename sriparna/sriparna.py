@@ -6,6 +6,8 @@ import random
 import string
 import time
 import pytz
+from datetime import datetime
+from dateutil import tz
 from geopy.geocoders import Nominatim
 import speech_recognition as sr
 from g4f.client import Client
@@ -209,6 +211,22 @@ def voice_assistant(text):
         subprocess.run(["termux-torch", "off"])
         return "Flashlight turned off."
 
+    # Check if the text contains any mention of checking battery status
+    if any(
+        keyword in text.lower()
+        for keyword in [
+            "battery percentage",
+            "battery status",
+            "battery health",
+            "my battery",
+        ]
+    ):
+        # Get local time zone
+        local_timezone = tz.tzlocal()
+        current_time = datetime.now(local_timezone).strftime('%H:%M:%S')  # Format the current time as desired
+        return current_time
+    else:
+        return "Sorry, I couldn't fetch the local time."
     # Check if the text contains any type of query asking about the current weather conditions
     if any(
         keyword in text.lower()
