@@ -4,7 +4,7 @@ import subprocess
 import codecs 
 import os
 
-VERSION = '1.0.1'
+VERSION = '1.0.2'
 
 class CustomInstall(install):
     def run(self):
