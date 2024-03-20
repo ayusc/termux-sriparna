@@ -230,7 +230,7 @@ def voice_assistant(text):
            # Format the current time 
            formatted_time = current_time.strftime("It is %I:%M:%S %p")
            return formatted_time
-     except Exception:    
+        except Exception:    
            return "Sorry, I couldn't fetch the local time." 
 
     # Check if the text contains any queries regarding current date
