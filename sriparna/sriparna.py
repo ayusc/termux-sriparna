@@ -222,17 +222,18 @@ def voice_assistant(text):
             "what time",
         ]
     ):
-        # Get local time zone
-        local_timezone = tz.tzlocal()       
-        # Get current time
-        current_time = datetime.now(local_timezone)
-        # Format the current time 
-        formatted_time = current_time.strftime("It is %I:%M:%S %p")
-        return formatted_time
-        
-    else:
-        return "Sorry, I couldn't fetch the local time." 
+        try:        
+           # Get local time zone
+           local_timezone = tz.tzlocal()       
+           # Get current time
+           current_time = datetime.now(local_timezone)
+           # Format the current time 
+           formatted_time = current_time.strftime("It is %I:%M:%S %p")
+           return formatted_time
+     except Exception:    
+           return "Sorry, I couldn't fetch the local time." 
 
+    # Check if the text contains any queries regarding current date
     if any(
         keyword in text.lower()
         for keyword in [
@@ -244,16 +245,16 @@ def voice_assistant(text):
             "which day"
         ]     
     ):
-        # Get local time zone
-        local_timezone = tz.tzlocal()       
-        # Get current time
-        current_time = datetime.now(local_timezone)
-        # Format the current date 
-        formatted_date = current_time.strftime("Today's date is: %B %d, %Y (%A)")
-        return formatted_date
-        
-    else:
-        return "Sorry, I couldn't fetch the local date." 
+        try:
+           # Get local time zone
+           local_timezone = tz.tzlocal()       
+           # Get current time
+           current_time = datetime.now(local_timezone)
+           # Format the current date 
+           formatted_date = current_time.strftime("Today's date is: %B %d, %Y (%A)")
+           return formatted_date
+     except Exception:
+           return "Sorry, I couldn't fetch the local date." 
     
     # Check if the text contains any type of query asking about the current weather conditions
     if any(
