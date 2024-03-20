@@ -37,7 +37,6 @@ setup(
         'termux',
         'termux-api',
         'g4f',
-        'android',
     ],  
     url='https://github.com/ayusc/termux-sriparna',
     project_urls={
