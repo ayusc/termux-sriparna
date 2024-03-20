@@ -294,6 +294,19 @@ def voice_assistant(text):
 
 def main():
     while True:
+      try:
+        record_audio()
+        convert_to_wav(input_file_path, output_file_path)
+        text = recognize_speech(output_file_path)
+        print("You said:", text)
+        print("")
+        os.remove(output_file_path)
+        os.remove(input_file_path)
+        response = voice_assistant(text)
+        print("Response:", response)
+        print("")
+      except Exception:
+        print("Something went wrong.\nPlease try again.")
         record_audio()
         convert_to_wav(input_file_path, output_file_path)
         text = recognize_speech(output_file_path)
