@@ -253,7 +253,7 @@ def voice_assistant(text):
            # Format the current date 
            formatted_date = current_time.strftime("Today's date is: %B %d, %Y (%A)")
            return formatted_date
-     except Exception:
+        except Exception:
            return "Sorry, I couldn't fetch the local date." 
     
     # Check if the text contains any type of query asking about the current weather conditions
