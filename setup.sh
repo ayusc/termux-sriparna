@@ -13,7 +13,7 @@ else
 fi
 
 # List of packages to install
-packages=("termux-api" "python" "openssl" "libexpat")
+packages=("termux-api" "python" "openssl" "libexpat" "ffmpeg")
 
 install_package() {
     pkg install -y $1 &>/dev/null
