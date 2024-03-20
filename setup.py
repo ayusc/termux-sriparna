@@ -14,7 +14,7 @@ class CustomInstall(install):
 with open('requirements.txt') as f:
     requirements = f.read().splitlines()
 
-DESCRIPTION = 'A voice assistant for Termux written in python using termux-api and g4f'
+DESCRIPTION = 'A voice assistant for Termux written in python using Termux Api'
 
 with codecs.open(os.path.join(os.path.abspath(os.path.dirname(__file__)), "README.md"), encoding="utf-8") as fh:
     LONG_DESCRIPTION = "\n" + fh.read()
