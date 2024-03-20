@@ -1,5 +1,5 @@
 # termux-sriparna
-A voice assistant for Termux written in python using [termux-api](https://wiki.termux.com/wiki/Termux:API)
+A voice assistant for Termux written in python using [Termux Api](https://wiki.termux.com/wiki/Termux:API)
 
 With sriparna you can:
 
