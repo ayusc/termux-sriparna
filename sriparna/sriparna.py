@@ -304,7 +304,8 @@ def main():
         os.remove(output_file_path)
         os.remove(input_file_path)
         response = voice_assistant(text)
-        print("Response:", response)
+        if response:
+         print("Response:", response)
         print("")
       except Exception:
         print("Something went wrong.\nPlease try again.")
@@ -316,7 +317,8 @@ def main():
         os.remove(output_file_path)
         os.remove(input_file_path)
         response = voice_assistant(text)
-        print("Response:", response)
+        if response:
+         print("Response:", response)
         print("")
 
 if __name__ == "__main__":
