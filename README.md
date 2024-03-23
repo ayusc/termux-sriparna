@@ -18,7 +18,7 @@ More features coming...
 
 **Note: This is a voice assistant and not to be used as a chatbot !**
 
-Leave a like to the repository
+If you like the project, don't forget to leave a star ⭐ to the repository.
 It motivates me to keep continue the project.
 
 **PR's are welcomed !!**
