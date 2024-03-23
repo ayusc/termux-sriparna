@@ -94,7 +94,7 @@ Note: In certain cases the speech recognition may not correctly identify the con
 
 ##### To open any application you can say "open whatsapp", "sriparna please open youtube" etc...
 
-You can open chrome, gmail, youtube with this, if you want more applications you need to specify their package names and class name in app.json
+You can open chrome, gmail, youtube and whatsapp with this, if you want more applications you need to specify their package names and class name in app.json
 
 You can use [Shortcut Maker](https://play.google.com/store/apps/details?id=rk.android.app.shortcutmaker) to find package name and class names of installed applications.
 
