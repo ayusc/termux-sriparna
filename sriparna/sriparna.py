@@ -57,13 +57,17 @@ def record_audio():
         user_input = input()
         if user_input.lower() == "r":
             print("Starting recording...")
-            subprocess.run(
+            try: 
+             subprocess.run(
                 ["termux-microphone-record", "-q"], stdout=subprocess.DEVNULL
-            )
-            subprocess.run(
+             )
+             subprocess.run(
                 ["termux-microphone-record", "-e", "awr_wide", "-f", input_file_path],
                 stdout=subprocess.DEVNULL,
-            )
+             )
+            except Exception:
+                print("I couldn't record the audio.\n Is RECORD_AUDIO permission granted ?\n"
+                sys.exit()
             break
         if user_input.lower() == "e":
             sys.exit()
@@ -79,7 +83,6 @@ def record_audio():
             print("Recording finished.")
             print("")
             break
-
 
 def convert_to_wav(input_file, output_file):
     subprocess.run(
