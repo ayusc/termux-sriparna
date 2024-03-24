@@ -29,8 +29,8 @@ setup(
     packages=find_packages(),
     package_data={'sriparna': ['apps.json']},
     include_package_data=True,
-    install_requires=requirements,
     cmdclass={'install': CustomInstall},
+    install_requires=requirements,
     keywords=[
         'python',
         'voice assistant',
