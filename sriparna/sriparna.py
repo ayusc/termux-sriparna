@@ -308,7 +308,7 @@ def main():
          print("Response:", response)
         print("")
       except Exception:
-        print("Something went wrong.\nPlease try again.")
+        print("Something went wrong.\nPlease try again.\n")
         record_audio()
         convert_to_wav(input_file_path, output_file_path)
         text = recognize_speech(output_file_path)
