@@ -4,5 +4,5 @@ brotli
 python_weather
 pytz
 geopy
-python-dialog
+pythondialog
 python-dateutil
