@@ -4,3 +4,4 @@ brotli
 python_weather
 pytz
 geopy
+python-dialog
