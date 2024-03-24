@@ -5,4 +5,4 @@ python_weather
 pytz
 geopy
 python-dialog
-dateutil
+python-dateutil
