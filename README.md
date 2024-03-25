@@ -39,6 +39,8 @@ Note: Download these apps from the following official links only.
 
 Do not use playstore version !!
 
+**Please grant all permission to Termux-api and disable battery optimisation for the app beforehand.** 
+
 ## Installation:
 
 ##### Install using pypi
