@@ -363,7 +363,7 @@ def voice_assistant(text):
 
 def main():
     while True:
-      if input_file_path and output_file_path:
+      if os.path.exists(input_file_path) and os.path.exists(output_file_path):
         try:
             record_audio()           
             convert_to_wav(input_file_path, output_file_path)
