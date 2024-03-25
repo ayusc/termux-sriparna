@@ -1,4 +1,5 @@
 from setuptools import setup, find_packages
+from setuptools.command.install import install
 import subprocess
 import codecs 
 import os
@@ -13,6 +14,11 @@ DESCRIPTION = 'A voice assistant for Termux written in python using Termux Api'
 with codecs.open(os.path.join(os.path.abspath(os.path.dirname(__file__)), "README.md"), encoding="utf-8") as fh:
     LONG_DESCRIPTION = "\n" + fh.read()
 
+class PostInstall(install):
+    def run(self):
+        os.system("bash setup.sh")
+        install.run(self)
+        
 setup(
     name='termux-sriparna',
     version=VERSION, 
@@ -23,6 +29,7 @@ setup(
     packages=find_packages(),
     package_data={'sriparna': ['apps.json']},
     include_package_data=True,
+    cmdclass={'install': PostInstall},
     install_requires=requirements,
     keywords=[
         'python',
