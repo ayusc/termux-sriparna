@@ -1,6 +1,6 @@
 # termux-sriparna
 
-![logo](logo.png)
+![logo](https://raw.githubusercontent.com/ayusc/termux-sriparna/main/logo.png)
 
 A voice assistant for Termux written in python using [Termux Api](https://wiki.termux.com/wiki/Termux:API)
 
@@ -51,7 +51,8 @@ pkg install python -y
 pip install -U termux-sriparna
 ```
 
-After using the above commands you can type ```sriparna``` to run the voice assistant.
+After using the above commands you can type ```sriparna``` or ```sriparna-gui``` to run the voice assistant.
+
 
 ##### or
 
