@@ -8,7 +8,8 @@ VERSION = '1.0.3'
 
 class CustomInstall(install):
     def run(self):
-        subprocess.check_call("bash setup.sh", shell=True)
+        print("Running setup script ...")
+        os.system("bash setup.sh")
         install.run(self)
 
 DESCRIPTION = 'A voice assistant for Termux written in python using Termux Api'
