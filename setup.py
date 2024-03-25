@@ -1,21 +1,18 @@
 from setuptools import setup, find_packages
-from setuptools.command.bdist_egg import bdist_egg as _bdist_egg
+import subprocess
 import codecs 
 import os
 
-VERSION = '1.0.4'
+VERSION = '1.0.5'
 
-# https://stackoverflow.com/questions/21915469/python-setuptools-install-requires-is-ignored-when-overriding-cmdclass
-class bdist_egg(_bdist_egg):
-    def run(self):
-        os.system("bash setup.sh")
-        _bdist_egg.run(self)
+with open('requirements.txt') as f:
+    requirements = f.read().splitlines()
 
 DESCRIPTION = 'A voice assistant for Termux written in python using Termux Api'
 
 with codecs.open(os.path.join(os.path.abspath(os.path.dirname(__file__)), "README.md"), encoding="utf-8") as fh:
     LONG_DESCRIPTION = "\n" + fh.read()
-    
+
 setup(
     name='termux-sriparna',
     version=VERSION, 
@@ -26,7 +23,7 @@ setup(
     packages=find_packages(),
     package_data={'sriparna': ['apps.json']},
     include_package_data=True,
-    cmdclass={'bdist_egg': bdist_egg},
+    install_requires=requirements,
     keywords=[
         'python',
         'voice assistant',
