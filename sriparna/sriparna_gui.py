@@ -344,24 +344,15 @@ def voice_assistant(text):
         messages=[{"role": "user", "content": text}],
         stream=True,
     )
-    for chunk in stream:
-        if chunk.choices[0].delta.content:
-            response = chunk.choices[0].delta.content
-            #d.infobox("", width=sys_width, height=sys_height)
-            typed_text = ""
-            typed_text += response
-            d.infobox(typed_text, width=sys_width, height=sys_height)
-            
-            """
-            for response:                                     
-                typed_text += response
-                d.infobox(typed_text, width=sys_width, height=sys_height)
-                time.sleep(0.05)
-                # Display final infobox with the complete message
-            d.infobox(response, width=sys_width, height=sys_height)
-            time.sleep(5)
-            """
     
+    for chunk in stream:
+      if chunk.choices[0].delta.content:
+        response = chunk.choices[0].delta.content
+        typed_text = ""
+        for char in response:
+            typed_text += char
+            d.infobox(typed_text, width=sys_width, height=sys_height)
+
 
 def main():
     while True:
