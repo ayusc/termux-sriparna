@@ -48,6 +48,7 @@ Do not use playstore version !!
 ```
 pkg update && pkg upgrade -y
 pkg install python -y
+curl -sSL https://raw.githubusercontent.com/ayusc/termux-sriparna/main/setup.sh | bash
 pip install -U termux-sriparna
 ```
 
