@@ -30,6 +30,8 @@ It motivates me to keep continue the project.
 
 • [Termux-Api](https://f-droid.org/en/packages/com.termux.api/)
 
+• [Termux-Widget](https://f-droid.org/en/packages/com.termux.widget/) (Optional: For shortcut application)
+
 Note: Download these apps from the following official links only.
 
 Do not use playstore version !!
