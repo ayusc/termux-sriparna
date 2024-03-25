@@ -132,24 +132,23 @@ def get_contact_info():
 async def get_weather_from_coordinates(latitude, longitude):
     geolocator = Nominatim(user_agent="http")
     location = geolocator.reverse((latitude, longitude))
-    # print(location.address)
+    #print(location.address)
     city = location.address.split(",")[0]
     async with python_weather.Client() as client:
         weather = await client.get(city)
         weather_info = f"Current weather in {city} is:\n\n"
-        weather_info += f"Type: {weather.current.kind} {weather.current.kind.emoji}\n"
-        weather_info += f"Temperature: {weather.current.temperature}°C\n"
-        weather_info += f"Feels Like: {weather.current.feels_like}°C\n"
-        weather_info += f"Description: {weather.current.description}\n"
-        weather_info += f"Humidity: {weather.current.humidity}%\n"
-        weather_info += f"Wind Speed: {weather.current.wind_speed} km/h\n"
-        weather_info += f"Wind Direction: {weather.current.wind_direction}\n"
-        weather_info += f"Visibility: {weather.current.visibility} km\n"
-        weather_info += f"Pressure: {weather.current.pressure} hPa\n"
-        weather_info += f"Precipitation: {weather.current.precipitation} mm\n"
-        weather_info += f"UV Index: {weather.current.ultraviolet}\n"
+        weather_info += f"Type: {weather.kind} {weather.kind.emoji}\n"
+        weather_info += f"Temperature: {weather.temperature}°C\n"
+        weather_info += f"Feels Like: {weather.feels_like}°C\n"
+        weather_info += f"Description: {weather.description}\n"
+        weather_info += f"Humidity: {weather.humidity}%\n"
+        weather_info += f"Wind Speed: {weather.wind_speed} km/h\n"
+        weather_info += f"Wind Direction: {weather.wind_direction}\n"
+        weather_info += f"Visibility: {weather.visibility} km\n"
+        weather_info += f"Pressure: {weather.pressure} hPa\n"
+        weather_info += f"Precipitation: {weather.precipitation} mm\n"
+        weather_info += f"UV Index: {weather.ultraviolet}\n"
         return weather_info
-
 
 def voice_assistant(text):
     # Check if the text contains any mention of checking battery status
