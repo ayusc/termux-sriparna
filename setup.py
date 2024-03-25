@@ -6,17 +6,18 @@ import os
 
 VERSION = '1.0.5'
 
-with open('requirements.txt') as f:
-    requirements = f.read().splitlines()
-
 DESCRIPTION = 'A voice assistant for Termux written in python using Termux Api'
 
 with codecs.open(os.path.join(os.path.abspath(os.path.dirname(__file__)), "README.md"), encoding="utf-8") as fh:
     LONG_DESCRIPTION = "\n" + fh.read()
 
+with codecs.open(os.path.join(os.path.abspath(os.path.dirname(__file__)), "requirements.txt"), encoding="utf-8") as f:
+    requirements = f.read().splitlines()
+    
 class PostInstall(install):
     def run(self):
-        os.system("bash setup.sh")
+        with codecs.open(os.path.join(os.path.abspath(os.path.dirname(__file__)), "setup.sh"), encoding="utf-8") as f:
+        os.system(f"bash {f}")
         install.run(self)
         
 setup(
