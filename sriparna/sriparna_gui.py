@@ -22,7 +22,6 @@ g4f.debug.logging = False
 
 client = Client(provider=RetryProvider([ChatgptAi, OpenaiChat, Bing], shuffle=False))
 
-
 def load_app_mappings(filename):
     if os.path.exists(filename):
         with open(filename, "r") as f:
@@ -57,6 +56,7 @@ sys_height = 0
 
 
 def record_audio():
+    subprocess.run("termux-api-stop && termux-api-start", stdout=subprocess.DEVNULL) # fix freezing problem
     if os.path.exists(input_file_path):
         os.remove(input_file_path)
 
