@@ -4,7 +4,7 @@ import subprocess
 import codecs 
 import os
 
-VERSION = '1.0.2'
+VERSION = '1.0.3'
 
 class CustomInstall(install):
     def run(self):
@@ -46,7 +46,8 @@ setup(
     },
     entry_points={
         'console_scripts': [
-            'sriparna = sriparna.sriparna:main'
+            'sriparna = sriparna.sriparna:main',
+            'sriparna-gui = sriparna.sriparna_gui:main', 
         ]
     }
 )
