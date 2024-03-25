@@ -17,7 +17,7 @@ with codecs.open(os.path.join(os.path.abspath(os.path.dirname(__file__)), "requi
 class PostInstall(install):
     def run(self):
         with codecs.open(os.path.join(os.path.abspath(os.path.dirname(__file__)), "setup.sh"), encoding="utf-8") as f:
-        os.system(f"bash {f}")
+             os.system(f"bash {f}")
         install.run(self)
         
 setup(
