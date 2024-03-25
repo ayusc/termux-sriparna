@@ -62,7 +62,7 @@ git clone https://github.com/ayusc/termux-sriparna
 2. Navigate to the project directory:
 
 ```
-cd termux-sriparna/sriparna
+cd termux-sriparna
 ```
 
 3. Run the setup script
@@ -71,17 +71,19 @@ cd termux-sriparna/sriparna
 bash setup.sh
 ```
 
-4. Install the required Python packages from `requirements.txt`:
+4. Run the voice assistant:
 
 ```
-pip install -r requirements.txt
+python sriparna/sriparna.py 
 ```
+For terminal version 
 
-5. Run the voice assistant:
+**or**
 
 ```
-python sriparna.py
+python sriparna/sriparna.py 
 ```
+For gui version
 
 ## Commands
 
