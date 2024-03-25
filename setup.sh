@@ -23,3 +23,7 @@ for pkg in "${packages[@]}"; do
     echo "Installing $pkg..."
     install_package "$pkg"
 done
+
+# Install python requirements 
+echo "Installing python packages ..."
+pip install -U -r requirements.txt
