@@ -22,6 +22,7 @@ g4f.debug.logging = False
 
 client = Client(provider=RetryProvider([ChatgptAi, OpenaiChat, Bing], shuffle=False))
 
+
 def load_app_mappings(filename):
     if os.path.exists(filename):
         with open(filename, "r") as f:
@@ -29,8 +30,11 @@ def load_app_mappings(filename):
     else:
         return {}
 
+
 python_version = "{}.{}".format(sys.version_info.major, sys.version_info.minor)
-appjson_path = "/data/data/com.termux/files/usr/lib/python{}/site-packages/sriparna/apps.json".format(python_version)
+appjson_path = "/data/data/com.termux/files/usr/lib/python{}/site-packages/sriparna/apps.json".format(
+    python_version
+)
 
 # Check if the given path exists, if not, fallback to using "apps.json"
 if os.path.exists(appjson_path):
@@ -44,36 +48,83 @@ random_chars = "".join(
 )
 input_file_path = f"/data/data/com.termux/files/home/{random_chars}.amr"
 output_file_path = f"/data/data/com.termux/files/home/{random_chars}.wav"
+
+# Python Dialog Setup
 d = dialog.Dialog(dialog="dialog")
+d.set_background_title("Welcome to Termux-Sriparna")
+sys_width = 0
+sys_height = 0
+
 
 def record_audio():
- if os.path.exists(input_file_path):
-    os.remove(input_file_path)
+    if os.path.exists(input_file_path):
+        os.remove(input_file_path)
 
- code, tag = d.radiolist(
-    "Select an option:",
-    choices=[
-        ("Start recording", "Start recording", False),
-        ("Exit", "Exit", False)
-    ],
-    height=10,
-    width=40,
-    no_tags=True,
-    no_cancel=True
-)
+    code, tag = d.radiolist(
+        "Select an option:",
+        choices=[
+            ("Start recording", "Start recording", False),
+            ("Term", "Enter Terminal Mode", False),
+            ("Live", "Enter live assistant mode (Slower)", False),
+            ("About", "About", False),
+            ("Exit", "Exit", False),
+        ],
+        height=sys_height,
+        width=sys_width,
+        no_tags=True,
+        no_cancel=True,
+    )
+    if code == d.ESC:
+        d.infobox("Why you want to escape?")
+        time.sleep(1)
+    elif code == d.OK:
+        if tag == "Start recording":
+            d.infobox("Starting recording...")
+            subprocess.run(
+                ["termux-microphone-record", "-q"], stdout=subprocess.DEVNULL
+            )
+            subprocess.run(
+                ["termux-microphone-record", "-e", "awr_wide", "-f", input_file_path],
+                stdout=subprocess.DEVNULL,
+            )
 
- if code == d.OK:
-    if tag == "Start recording":
-        d.infobox("Starting recording...")
-        subprocess.run(["termux-microphone-record", "-q"], stdout=subprocess.DEVNULL)
-        subprocess.run(
-            ["termux-microphone-record", "-e", "awr_wide", "-f", input_file_path],
-            stdout=subprocess.DEVNULL,
-        )
-        d.msgbox("Recording finished.")
-        
-    elif tag == "Exit":
-        sys.exit()
+            code = d.yesno(
+                "Do you want to stop recording ?",
+                width=sys_width,
+                height=sys_height,
+                no_collapse=True,
+            )
+            if code == d.OK:
+                subprocess.run(
+                    ["termux-microphone-record", "-q"], stdout=subprocess.DEVNULL
+                )
+                d.infobox("Recording finished.")
+                time.sleep(1)
+                d.infobox("Working on it ...")
+                time.sleep(2)
+
+            elif code == d.CANCEL:
+                d.infobox("No worries, I am still listening ...")
+                time.sleep(2)
+            elif code == d.ESC:
+                d.infobox("Why you want to escape?")
+                time.sleep(2)
+
+        elif tag == "Exit":
+            d.infobox("Goodbye! See you soon ...")
+            time.sleep(2)
+            os.system("clear")
+            sys.exit()
+        elif tag == "Term":
+            d.infobox("Entering Terminal mode ...")
+            time.sleep(3)
+            os.system("clear && sriparna")
+            sys.exit()
+        elif tag == "Live":
+            pass
+            # To be implemented
+        elif tag == "About":
+            d.msgbox("Hello user, my name is Sriparna\nI am a voice assistant written in python")
 
 
 def convert_to_wav(input_file, output_file):
@@ -107,4 +158,240 @@ def recognize_speech(audio_file):
             return "Could not understand audio"
         except sr.RequestError as e:
             return "Error: " + str(e)
-          
+
+
+def get_contact_info():
+    contacts_json = subprocess.check_output(["termux-contact-list"])
+    contacts = json.loads(contacts_json)
+    contact_info = {}
+    for contact in contacts:
+        name = contact["name"].lower().replace(" ", "")
+        number = contact["number"]
+        contact_info[name] = number
+    return contact_info
+
+
+async def get_weather_from_coordinates(latitude, longitude):
+    geolocator = Nominatim(user_agent="http")
+    location = geolocator.reverse((latitude, longitude))
+    # print(location.address)
+    city = location.address.split(",")[0]
+    async with python_weather.Client() as client:
+        weather = await client.get(city)
+        weather_info = f"Current weather in {city} is:\n\n"
+        weather_info += f"Type: {weather.current.kind} {weather.current.kind.emoji}\n"
+        weather_info += f"Temperature: {weather.current.temperature}°C\n"
+        weather_info += f"Feels Like: {weather.current.feels_like}°C\n"
+        weather_info += f"Description: {weather.current.description}\n"
+        weather_info += f"Humidity: {weather.current.humidity}%\n"
+        weather_info += f"Wind Speed: {weather.current.wind_speed} km/h\n"
+        weather_info += f"Wind Direction: {weather.current.wind_direction}\n"
+        weather_info += f"Visibility: {weather.current.visibility} km\n"
+        weather_info += f"Pressure: {weather.current.pressure} hPa\n"
+        weather_info += f"Precipitation: {weather.current.precipitation} mm\n"
+        weather_info += f"UV Index: {weather.current.ultraviolet}\n"
+        return weather_info
+
+
+def voice_assistant(text):
+    # Check if the text contains any mention of checking battery status
+    if any(
+        keyword in text.lower()
+        for keyword in [
+            "battery percentage",
+            "battery status",
+            "battery health",
+            "my battery",
+        ]
+    ):
+        # Run the command to get battery status using termux-battery-status
+        battery_status_output = subprocess.check_output(
+            ["termux-battery-status"]
+        ).decode("utf-8")
+        battery_status_json = json.loads(battery_status_output)
+        battery_percentage = battery_status_json.get("percentage", "unknown")
+        return f"Your battery percentage is {battery_percentage}%"
+
+    # Check if the text contains any commands to open apps
+    for app, intent in app_mappings.items():
+        if f"open {app.lower()}" in text.lower():
+            # Search for the app and open it if found
+            subprocess.run(["am", "start", "-n", intent], stdout=subprocess.DEVNULL)
+            return f"Opening {app}"
+
+    # Check if the text contains a command to call a mobile number
+    call_pattern = r"call\s*(\+?\s*\d+(?:\s*\d+)*)"
+    match = re.search(call_pattern, text.lower())
+    if match:
+        number = match.group(1).replace(" ", "")  # Remove spaces from the number
+        if "plus" in text.lower():
+            subprocess.run(
+                ["termux-telephony-call", f"+{number}"], stdout=subprocess.DEVNULL
+            )
+            return f"Calling {number}"
+        else:
+            subprocess.run(["termux-telephony-call", number], stdout=subprocess.DEVNULL)
+            return f"Calling {number}"
+
+    # Check if the text contains a command to call a contact
+    contact_info = get_contact_info()
+    call_name_pattern = r"call\s*(.*)"
+    match_name = re.search(call_name_pattern, text.lower())
+    if match_name:
+        name = (
+            match_name.group(1).lower().replace(" ", "")
+        )  # Remove spaces from the name
+        for contact_name in contact_info.keys():
+            if name == contact_name:
+                number = contact_info[contact_name]
+                subprocess.run(
+                    ["termux-telephony-call", number], stdout=subprocess.DEVNULL
+                )
+                return f"Calling {name}"
+        return f"No contact found with name {name}"
+
+    if (
+        "flash on" in text.lower()
+        or "torch on" in text.lower()
+        or "on the flash" in text.lower()
+        or "on the torch" in text.lower()
+    ):
+        subprocess.run(["termux-torch", "on"])
+        return "Flashlight turned on."
+    elif (
+        "flash off" in text.lower()
+        or "torch off" in text.lower()
+        or "off the flash" in text.lower()
+        or "off the torch" in text.lower()
+    ):
+        subprocess.run(["termux-torch", "off"])
+        return "Flashlight turned off."
+
+    # Check if the text contains any queries regarding current time
+    if any(
+        keyword in text.lower()
+        for keyword in [
+            "what is the time",
+            "what's the time",
+            "time now",
+            "current time",
+            "what time",
+        ]
+    ):
+        try:
+            # Get local time zone
+            local_timezone = tz.tzlocal()
+            # Get current time
+            current_time = datetime.now(local_timezone)
+            # Format the current time
+            formatted_time = current_time.strftime("It is %I:%M:%S %p")
+            return formatted_time
+        except Exception:
+            return "Sorry, I couldn't fetch the local time."
+
+    # Check if the text contains any queries regarding current date
+    if any(
+        keyword in text.lower()
+        for keyword in [
+            "what is the date",
+            "what's the date",
+            "date today",
+            "today's date",
+            "what day",
+            "which day",
+        ]
+    ):
+        try:
+            # Get local time zone
+            local_timezone = tz.tzlocal()
+            # Get current time
+            current_time = datetime.now(local_timezone)
+            # Format the current date
+            formatted_date = current_time.strftime("Today's date is: %B %d, %Y (%A)")
+            return formatted_date
+        except Exception:
+            return "Sorry, I couldn't fetch the local date."
+
+    # Check if the text contains any type of query asking about the current weather conditions
+    if any(
+        keyword in text.lower()
+        for keyword in [
+            "weather alike",
+            "weather conditions",
+            "current weather",
+            "weather forecast",
+            "how is the weather",
+        ]
+    ):
+        try:
+            # Fetch GPS coordinates
+            gps_output = subprocess.check_output(
+                ["termux-location", "-p", "gps"]
+            ).decode("utf-8")
+            gps_json = json.loads(gps_output)
+            latitude = gps_json.get("latitude")
+            longitude = gps_json.get("longitude")
+            if latitude and longitude:
+                # Get weather information from coordinates
+                return asyncio.run(get_weather_from_coordinates(latitude, longitude))
+
+        except subprocess.TimeoutExpired:
+            return "Unable to fetch GPS coordinates. Is your location turned off ?"
+
+    stream = client.chat.completions.create(
+        model="gpt-4-turbo",
+        messages=[{"role": "user", "content": text}],
+        stream=True,
+    )
+    for chunk in stream:
+        if chunk.choices[0].delta.content:
+            response = chunk.choices[0].delta.content
+            #d.infobox("", width=sys_width, height=sys_height)
+            typed_text = ""
+            typed_text += response
+            d.infobox(typed_text, width=sys_width, height=sys_height)
+            
+            """
+            for response:                                     
+                typed_text += response
+                d.infobox(typed_text, width=sys_width, height=sys_height)
+                time.sleep(0.05)
+                # Display final infobox with the complete message
+            d.infobox(response, width=sys_width, height=sys_height)
+            time.sleep(5)
+            """
+    
+
+def main():
+    while True:
+      if input_file_path and output_file_path:
+        try:
+            record_audio()           
+            convert_to_wav(input_file_path, output_file_path)
+            text = recognize_speech(output_file_path)
+            d.infobox(f"You said: {text}")
+            time.sleep(5)
+            os.remove(output_file_path)
+            os.remove(input_file_path)
+            response = voice_assistant(text)
+            if response:
+                d.msgbox(f"Response: {response}")               
+
+        except Exception as e:
+            print(f"Something went wrong.\nPlease try again.\nException Caught: {e}")
+            record_audio()
+            convert_to_wav(input_file_path, output_file_path)
+            text = recognize_speech(output_file_path)
+            d.infobox(f"You said: {text}")
+            time.sleep(5)
+            os.remove(output_file_path)
+            os.remove(input_file_path)
+            response = voice_assistant(text)
+            if response:
+                d.msgbox(f"Response: {response}")
+      else:
+          d.infobox("Something went wrong while speech recognition !")
+          time.sleep(2)
+
+if __name__ == "__main__":
+    main()
