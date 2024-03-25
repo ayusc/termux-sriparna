@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pkg update && pkg upgrade -y
+pkg update -y && pkg upgrade -y
 
 # Workaround to check for Termux Api App Installation 
 if timeout 5 termux-toast "Working ..." &>/dev/null; then
