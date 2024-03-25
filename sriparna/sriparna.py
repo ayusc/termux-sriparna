@@ -46,6 +46,7 @@ output_file_path = f"/data/data/com.termux/files/home/{random_chars}.wav"
 
 
 def record_audio():
+    os.system("termux-api-start") # force start termux-api
     if os.path.exists(input_file_path):
         os.remove(input_file_path)
 
