@@ -1,9 +1,9 @@
 #!/bin/bash
 
-pkg update -y && pkg upgrade -y
+pkg update -y && pkg upgrade -y && pkg install termux-api -y &>/dev/null
 
 # Workaround to check for Termux Api App Installation 
-if timeout 5 termux-toast "Working ..." &>/dev/null; then
+if timeout 5 termux-api-stop&&termux-api-start&&termux-toast "Working ..." &>/dev/null; then
         :
 else
         echo "Termux API app is not installed."
