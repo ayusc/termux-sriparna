@@ -51,7 +51,7 @@ def record_audio():
         os.remove(input_file_path)
 
     print(
-        "Type 'r' and hit Enter to start recording...\nType 'e' and hit enter to exit.\n"
+        "Type 'r' and hit Enter to start recording...\nType 'e' and hit enter to exit.\n")
     )
 
     while True:
@@ -295,6 +295,7 @@ def voice_assistant(text):
             response = chunk.choices[0].delta.content
             for char in response:
                 print(char, end="", flush=True)
+                print("")
                 time.sleep(0.05)
 
 def main():
