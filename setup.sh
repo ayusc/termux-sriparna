@@ -43,6 +43,7 @@ echo "Installing python packages ..."
 pip install -U -r requirements.txt
 
 # Termux:Widget implementation 
+echo
 if widget_needed "Do you want a shortcut widget for the "; then
     mkdir -p ~/.termux/widget/dynamic_shortcuts
     mkdir -p /data/data/com.termux/files/home/.shortcuts
