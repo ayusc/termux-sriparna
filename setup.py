@@ -5,11 +5,12 @@ import os
 
 VERSION = '1.0.3'
 
+# https://stackoverflow.com/questions/21915469/python-setuptools-install-requires-is-ignored-when-overriding-cmdclass
 class CustomInstall(install):
     def run(self):
         print("Running setup script ...")
         os.system("bash setup.sh")
-        install.run(self)
+        install.do_egg_install()
 
 DESCRIPTION = 'A voice assistant for Termux written in python using Termux Api'
 
