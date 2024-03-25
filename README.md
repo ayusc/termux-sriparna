@@ -1,4 +1,7 @@
 # termux-sriparna
+
+![logo](logo.png)
+
 A voice assistant for Termux written in python using [Termux Api](https://wiki.termux.com/wiki/Termux:API)
 
 With sriparna you can:
