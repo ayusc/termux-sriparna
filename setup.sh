@@ -38,10 +38,6 @@ for pkg in "${packages[@]}"; do
     install_package "$pkg"
 done
 
-# Install python requirements 
-echo "Installing python packages ..."
-pip install -U -r requirements.txt
-
 # Termux:Widget implementation 
 echo
 if widget_needed "Do you want a shortcut widget for the "; then
