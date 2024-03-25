@@ -50,9 +50,7 @@ def record_audio():
     if os.path.exists(input_file_path):
         os.remove(input_file_path)
 
-    print(
-        "Type 'r' and hit Enter to start recording...\nType 'e' and hit enter to exit.\n")
-    )
+    print("\nType 'r' and hit Enter to start recording...\nType 'e' and hit enter to exit.\n")
 
     while True:
         user_input = input()
