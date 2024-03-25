@@ -344,15 +344,15 @@ def voice_assistant(text):
         messages=[{"role": "user", "content": text}],
         stream=True,
     )
-    
+    typed_text = ""  
     for chunk in stream:
-      if chunk.choices[0].delta.content:
-        response = chunk.choices[0].delta.content
-        typed_text = ""
-        for char in response:
-            typed_text += char
+        if chunk.choices[0].delta.content:
+            response = chunk.choices[0].delta.content
+            typed_text += response
             d.infobox(typed_text, width=sys_width, height=sys_height)
-
+            time.sleep(0.05)
+    d.infobox(typed_text, width=sys_width, height=sys_height)  
+    time.sleep(4)     
 
 def main():
     while True:
@@ -361,7 +361,7 @@ def main():
             convert_to_wav(input_file_path, output_file_path)
             text = recognize_speech(output_file_path)
             d.infobox(f"You said: {text}")
-            time.sleep(5)
+            time.sleep(4)
             os.remove(output_file_path)
             os.remove(input_file_path)
             response = voice_assistant(text)
@@ -374,7 +374,7 @@ def main():
             convert_to_wav(input_file_path, output_file_path)
             text = recognize_speech(output_file_path)
             d.infobox(f"You said: {text}")
-            time.sleep(5)
+            time.sleep(4)
             os.remove(output_file_path)
             os.remove(input_file_path)
             response = voice_assistant(text)
