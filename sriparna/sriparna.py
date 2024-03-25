@@ -65,13 +65,13 @@ def record_audio():
                 stdout=subprocess.DEVNULL,
              )
             except Exception:
-                print("I couldn't record the audio.\n Is RECORD_AUDIO permission granted ?\n"
+                print("I couldn't record the audio.\n Is RECORD_AUDIO permission granted ?\n")
                 sys.exit()
             break
         if user_input.lower() == "e":
             sys.exit()
 
-    print("Type 'q' and hit Enter to stop recording...\n")
+    print("\nType 'q' and hit Enter to stop recording...\n")
 
     while True:
         user_input = input()
