@@ -46,7 +46,7 @@ output_file_path = f"/data/data/com.termux/files/home/{random_chars}.wav"
 
 
 def record_audio():
-    os.system("termux-api-stop && termux-api-start &> /dev/null") # fix freezing problem
+    os.system("termux-api-stop &> /dev/null && termux-api-start &> /dev/null") # fix freezing problem
     if os.path.exists(input_file_path):
         os.remove(input_file_path)
 
@@ -292,7 +292,6 @@ def voice_assistant(text):
             response = chunk.choices[0].delta.content
             for char in response:
                 print(char, end="", flush=True)
-                print("")
                 time.sleep(0.05)
 
 def main():
