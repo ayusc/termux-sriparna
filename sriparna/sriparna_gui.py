@@ -389,8 +389,7 @@ def main():
             if response:
                 d.msgbox(f"Response: {response}")
       else:
-          d.infobox("Something went wrong while speech recognition !")
-          time.sleep(2)
+          pass
 
 if __name__ == "__main__":
     main()
