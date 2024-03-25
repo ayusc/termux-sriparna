@@ -48,14 +48,19 @@ if widget_needed "Do you want a shortcut widget for the "; then
     mkdir -p ~/.termux/widget/dynamic_shortcuts
     mkdir -p /data/data/com.termux/files/home/.shortcuts
     chmod 700 -R /data/data/com.termux/files/home/.shortcuts
-    mkdir -p /data/data/com.termux/files/home/.shortcuts/tasks
-    chmod 700 -R /data/data/com.termux/files/home/.shortcuts/tasks
+    cp sriparna.sh /data/data/com.termux/files/home/.shortcuts
+    echo "sriparna" > /data/data/com.termux/files/home/.shortcuts/Sriparna
+    echo "sriparna-gui" > /data/data/com.termux/files/home/.shortcuts/Sriparna-Gui
+    chmod +x /data/data/com.termux/files/home/.shortcuts/Sriparna
+    chmod +x /data/data/com.termux/files/home/.shortcuts/Sriparna-Gui
     mkdir -p /data/data/com.termux/files/home/.shortcuts/icons
-    cp sriparna.sh /data/data/com.termux/files/home/.shortcuts/tasks
     chmod -R a-x,u=rwX,go-rwx /data/data/com.termux/files/home/.shortcuts/icons
-    cp logo.png /data/data/com.termux/files/home/.shortcuts/icons/sriparna.sh.png
-    cp sriparna.sh ~/.termux/widget/dynamic_shortcuts
-
+    cp logo.png /data/data/com.termux/files/home/.shortcuts/icons/Sriparna.png
+    cp logo.png /data/data/com.termux/files/home/.shortcuts/icons/Sriparna-Gui.png
+    cp Sriparna ~/.termux/widget/dynamic_shortcuts
+    cp Sriparna-Gui ~/.termux/widget/dynamic_shortcuts
+    echo
+    echo -e "Shortcut widget is created!\nLong click on Termux:Widget app and select Termux shortcut\nThere you will get two scripts, drag them to your homescreen\nYou can directly run these scripts by clicking on them !"
 else
     echo "Fine, widget will not be created !"
 fi
