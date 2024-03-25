@@ -10,7 +10,7 @@ class CustomInstall(install):
     def run(self):
         print("Running setup script ...")
         os.system("bash setup.sh")
-        install.do_egg_install()
+        install.do_egg_install(self)
 
 DESCRIPTION = 'A voice assistant for Termux written in python using Termux Api'
 
