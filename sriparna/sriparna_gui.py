@@ -77,6 +77,7 @@ def record_audio():
     if code == d.ESC:
         d.infobox("Why you want to escape?")
         time.sleep(1)
+        main()
     elif code == d.OK:
         if tag == "Start recording":
             d.infobox("Starting recording...")
@@ -106,6 +107,7 @@ def record_audio():
             elif code == d.CANCEL:
                 d.infobox("No worries, I am still listening ...")
                 time.sleep(2)
+                
             elif code == d.ESC:
                 d.infobox("Why you want to escape?")
                 time.sleep(2)
@@ -125,7 +127,7 @@ def record_audio():
             # To be implemented
         elif tag == "About":
             d.msgbox("Hello user, my name is Sriparna\nI am a voice assistant written in python")
-
+            main()
 
 def convert_to_wav(input_file, output_file):
     subprocess.run(
@@ -363,7 +365,6 @@ def voice_assistant(text):
 
 def main():
     while True:
-      if os.path.exists(input_file_path) and os.path.exists(output_file_path):
         try:
             record_audio()           
             convert_to_wav(input_file_path, output_file_path)
@@ -388,8 +389,6 @@ def main():
             response = voice_assistant(text)
             if response:
                 d.msgbox(f"Response: {response}")
-      else:
-          pass
 
 if __name__ == "__main__":
     main()
