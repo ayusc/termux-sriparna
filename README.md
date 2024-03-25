@@ -13,7 +13,7 @@ With sriparna you can:
 5) Check whether ✅
 6) See current date and time ✅
 7) See live location (with google maps link) ❌
-8) Read call logs ❌
+8) Read call logs ❌ (Deprecated)
 9) Perform any search ✅
 10) Turn Flash on/off ✅
     
