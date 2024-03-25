@@ -56,8 +56,8 @@ sys_height = 0
 
 
 def record_audio():
-    subprocess.run("termux-api-stop && termux-api-start", stdout=subprocess.DEVNULL) # fix freezing problem
-    if os.path.exists(input_file_path):
+   os.system("termux-api-stop &> /dev/null && termux-api-start &> /dev/null") # fix freezing problem
+   if os.path.exists(input_file_path):
         os.remove(input_file_path)
 
     code, tag = d.radiolist(
