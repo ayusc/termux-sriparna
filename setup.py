@@ -3,7 +3,7 @@ from setuptools.command.bdist_egg import bdist_egg as _bdist_egg
 import codecs 
 import os
 
-VERSION = '1.0.3'
+VERSION = '1.0.4'
 
 # https://stackoverflow.com/questions/21915469/python-setuptools-install-requires-is-ignored-when-overriding-cmdclass
 class bdist_egg(_bdist_egg):
