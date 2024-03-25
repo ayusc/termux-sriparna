@@ -6,12 +6,6 @@ import os
 VERSION = '1.0.3'
 
 # https://stackoverflow.com/questions/21915469/python-setuptools-install-requires-is-ignored-when-overriding-cmdclass
-class CustomInstall(install):
-    def run(self):
-        print("Running setup script ...")
-
-        install.do_egg_install()
-
 class bdist_egg(_bdist_egg):
     def run(self):
         os.system("bash setup.sh")
