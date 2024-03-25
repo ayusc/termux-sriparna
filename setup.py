@@ -1,5 +1,5 @@
 from setuptools import setup, find_packages
-from setuptools.command.install import install
+from setuptools.command.bdist_egg import bdist_egg as _bdist_egg
 import codecs 
 import os
 
@@ -9,8 +9,13 @@ VERSION = '1.0.3'
 class CustomInstall(install):
     def run(self):
         print("Running setup script ...")
-        os.system("bash setup.sh")
+
         install.do_egg_install()
+
+class bdist_egg(_bdist_egg):
+    def run(self):
+        os.system("bash setup.sh")
+        _bdist_egg.run(self)
 
 DESCRIPTION = 'A voice assistant for Termux written in python using Termux Api'
 
@@ -27,7 +32,7 @@ setup(
     packages=find_packages(),
     package_data={'sriparna': ['apps.json']},
     include_package_data=True,
-    cmdclass={'install': CustomInstall},
+    cmdclass={'bdist_egg': bdist_egg},
     keywords=[
         'python',
         'voice assistant',
