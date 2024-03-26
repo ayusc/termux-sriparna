@@ -12,7 +12,6 @@ import subprocess
 import random
 import string
 import time
-import pytz
 from datetime import datetime
 from dateutil import tz
 from geopy.geocoders import Nominatim
@@ -28,6 +27,7 @@ g4f.debug.logging = False
 
 client = Client(provider=RetryProvider([ChatgptAi, OpenaiChat, Bing], shuffle=False))
 
+
 def load_app_mappings(filename):
     if os.path.exists(filename):
         with open(filename, "r") as f:
@@ -35,8 +35,11 @@ def load_app_mappings(filename):
     else:
         return {}
 
+
 python_version = "{}.{}".format(sys.version_info.major, sys.version_info.minor)
-appjson_path = "/data/data/com.termux/files/usr/lib/python{}/site-packages/sriparna/apps.json".format(python_version)
+appjson_path = "/data/data/com.termux/files/usr/lib/python{}/site-packages/sriparna/apps.json".format(
+    python_version
+)
 
 # Check if the given path exists, if not, fallback to using "apps.json"
 if os.path.exists(appjson_path):
@@ -53,26 +56,38 @@ output_file_path = f"/data/data/com.termux/files/home/{random_chars}.wav"
 
 
 def record_audio():
-    os.system("termux-api-stop &> /dev/null && termux-api-start &> /dev/null") # fix freezing problem
+    os.system(
+        "termux-api-stop &> /dev/null && termux-api-start &> /dev/null"
+    )  # fix freezing problem
     if os.path.exists(input_file_path):
         os.remove(input_file_path)
 
-    print("\nType 'r' and hit Enter to start recording...\nType 'e' and hit enter to exit.\n")
+    print(
+        "\nType 'r' and hit Enter to start recording...\nType 'e' and hit enter to exit.\n"
+    )
 
     while True:
         user_input = input()
         if user_input.lower() == "r":
             print("Starting recording...")
-            try: 
-             subprocess.run(
-                ["termux-microphone-record", "-q"], stdout=subprocess.DEVNULL
-             )
-             subprocess.run(
-                ["termux-microphone-record", "-e", "awr_wide", "-f", input_file_path],
-                stdout=subprocess.DEVNULL,
-             )
+            try:
+                subprocess.run(
+                    ["termux-microphone-record", "-q"], stdout=subprocess.DEVNULL
+                )
+                subprocess.run(
+                    [
+                        "termux-microphone-record",
+                        "-e",
+                        "awr_wide",
+                        "-f",
+                        input_file_path,
+                    ],
+                    stdout=subprocess.DEVNULL,
+                )
             except Exception:
-                print("I couldn't record the audio.\n Is RECORD_AUDIO permission granted ?\n")
+                print(
+                    "I couldn't record the audio.\n Is RECORD_AUDIO permission granted ?\n"
+                )
                 sys.exit()
             break
         if user_input.lower() == "e":
@@ -89,6 +104,7 @@ def record_audio():
             print("Recording finished.")
             print("")
             break
+
 
 def convert_to_wav(input_file, output_file):
     subprocess.run(
@@ -137,7 +153,7 @@ def get_contact_info():
 async def get_weather_from_coordinates(latitude, longitude):
     geolocator = Nominatim(user_agent="http")
     location = geolocator.reverse((latitude, longitude))
-    #print(location.address)
+    # print(location.address)
     city = location.address.split(",")[0]
     async with python_weather.Client() as client:
         weather = await client.get(city)
@@ -154,6 +170,7 @@ async def get_weather_from_coordinates(latitude, longitude):
         weather_info += f"Precipitation: {weather.precipitation} mm\n"
         weather_info += f"UV Index: {weather.ultraviolet}\n"
         return weather_info
+
 
 def voice_assistant(text):
     # Check if the text contains any mention of checking battery status
@@ -212,10 +229,20 @@ def voice_assistant(text):
                 return f"Calling {name}"
         return f"No contact found with name {name}"
 
-    if "flash on" in text.lower() or "torch on" in text.lower() or "on the flash" in text.lower() or "on the torch" in text.lower():
+    if (
+        "flash on" in text.lower()
+        or "torch on" in text.lower()
+        or "on the flash" in text.lower()
+        or "on the torch" in text.lower()
+    ):
         subprocess.run(["termux-torch", "on"])
         return "Flashlight turned on."
-    elif "flash off" in text.lower()  or "torch off" in text.lower() or "off the flash" in text.lower() or "off the torch" in text.lower():
+    elif (
+        "flash off" in text.lower()
+        or "torch off" in text.lower()
+        or "off the flash" in text.lower()
+        or "off the torch" in text.lower()
+    ):
         subprocess.run(["termux-torch", "off"])
         return "Flashlight turned off."
 
@@ -230,16 +257,16 @@ def voice_assistant(text):
             "what time",
         ]
     ):
-        try:        
-           # Get local time zone
-           local_timezone = tz.tzlocal()       
-           # Get current time
-           current_time = datetime.now(local_timezone)
-           # Format the current time 
-           formatted_time = current_time.strftime("It is %I:%M:%S %p")
-           return formatted_time
-        except Exception:    
-           return "Sorry, I couldn't fetch the local time." 
+        try:
+            # Get local time zone
+            local_timezone = tz.tzlocal()
+            # Get current time
+            current_time = datetime.now(local_timezone)
+            # Format the current time
+            formatted_time = current_time.strftime("It is %I:%M:%S %p")
+            return formatted_time
+        except Exception:
+            return "Sorry, I couldn't fetch the local time."
 
     # Check if the text contains any queries regarding current date
     if any(
@@ -250,20 +277,20 @@ def voice_assistant(text):
             "date today",
             "today's date",
             "what day",
-            "which day"
-        ]     
+            "which day",
+        ]
     ):
         try:
-           # Get local time zone
-           local_timezone = tz.tzlocal()       
-           # Get current time
-           current_time = datetime.now(local_timezone)
-           # Format the current date 
-           formatted_date = current_time.strftime("Today's date is: %B %d, %Y (%A)")
-           return formatted_date
+            # Get local time zone
+            local_timezone = tz.tzlocal()
+            # Get current time
+            current_time = datetime.now(local_timezone)
+            # Format the current date
+            formatted_date = current_time.strftime("Today's date is: %B %d, %Y (%A)")
+            return formatted_date
         except Exception:
-           return "Sorry, I couldn't fetch the local date." 
-    
+            return "Sorry, I couldn't fetch the local date."
+
     # Check if the text contains any type of query asking about the current weather conditions
     if any(
         keyword in text.lower()
@@ -276,9 +303,10 @@ def voice_assistant(text):
         ]
     ):
         try:
-            # Fetch GPS coordinates 
+            # Fetch GPS coordinates
             gps_output = subprocess.check_output(
-                ["termux-location", "-p", "gps"]).decode("utf-8")
+                ["termux-location", "-p", "gps"]
+            ).decode("utf-8")
             gps_json = json.loads(gps_output)
             latitude = gps_json.get("latitude")
             longitude = gps_json.get("longitude")
@@ -301,33 +329,35 @@ def voice_assistant(text):
                 print(char, end="", flush=True)
                 time.sleep(0.05)
 
+
 def main():
     while True:
-      try:
-        record_audio()
-        convert_to_wav(input_file_path, output_file_path)
-        text = recognize_speech(output_file_path)
-        print("You said:", text)
-        print("")
-        os.remove(output_file_path)
-        os.remove(input_file_path)
-        response = voice_assistant(text)
-        if response:
-         print("Response:", response)
-        print("")
-      except Exception as e :
-        print(f"Something went wrong.\nPlease try again.\nException Caught: {e}")
-        record_audio()
-        convert_to_wav(input_file_path, output_file_path)
-        text = recognize_speech(output_file_path)
-        print("You said:", text)
-        print("")
-        os.remove(output_file_path)
-        os.remove(input_file_path)
-        response = voice_assistant(text)
-        if response:
-         print("Response:", response)
-        print("")
+        try:
+            record_audio()
+            convert_to_wav(input_file_path, output_file_path)
+            text = recognize_speech(output_file_path)
+            print("You said:", text)
+            print("")
+            os.remove(output_file_path)
+            os.remove(input_file_path)
+            response = voice_assistant(text)
+            if response:
+                print("Response:", response)
+            print("")
+        except Exception as e:
+            print(f"Something went wrong.\nPlease try again.\nException Caught: {e}")
+            record_audio()
+            convert_to_wav(input_file_path, output_file_path)
+            text = recognize_speech(output_file_path)
+            print("You said:", text)
+            print("")
+            os.remove(output_file_path)
+            os.remove(input_file_path)
+            response = voice_assistant(text)
+            if response:
+                print("Response:", response)
+            print("")
+
 
 if __name__ == "__main__":
     main()

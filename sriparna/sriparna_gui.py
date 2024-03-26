@@ -12,7 +12,6 @@ import subprocess
 import random
 import string
 import time
-import pytz
 from datetime import datetime
 from dateutil import tz
 from geopy.geocoders import Nominatim
@@ -28,6 +27,7 @@ import dialog
 g4f.debug.logging = False
 
 client = Client(provider=RetryProvider([ChatgptAi, OpenaiChat, Bing], shuffle=False))
+
 
 def load_app_mappings(filename):
     if os.path.exists(filename):
@@ -63,7 +63,9 @@ sys_height = 0
 
 
 def record_audio():
-    os.system("termux-api-stop &> /dev/null && termux-api-start &> /dev/null") # fix freezing problem
+    os.system(
+        "termux-api-stop &> /dev/null && termux-api-start &> /dev/null"
+    )  # fix freezing problem
     if os.path.exists(input_file_path):
         os.remove(input_file_path)
 
@@ -114,7 +116,7 @@ def record_audio():
             elif code == d.CANCEL:
                 d.infobox("No worries, I am still listening ...")
                 time.sleep(2)
-                
+
             elif code == d.ESC:
                 d.infobox("Why you want to escape?")
                 time.sleep(2)
@@ -133,8 +135,11 @@ def record_audio():
             pass
             # To be implemented
         elif tag == "About":
-            d.msgbox("Hello user, my name is Sriparna\nI am a voice assistant written in python")
+            d.msgbox(
+                "Hello user, my name is Sriparna\nI am a voice assistant written in python"
+            )
             main()
+
 
 def convert_to_wav(input_file, output_file):
     subprocess.run(
@@ -183,7 +188,7 @@ def get_contact_info():
 async def get_weather_from_coordinates(latitude, longitude):
     geolocator = Nominatim(user_agent="http")
     location = geolocator.reverse((latitude, longitude))
-    #print(location.address)
+    # print(location.address)
     city = location.address.split(",")[0]
     async with python_weather.Client() as client:
         weather = await client.get(city)
@@ -200,6 +205,7 @@ async def get_weather_from_coordinates(latitude, longitude):
         weather_info += f"Precipitation: {weather.precipitation} mm\n"
         weather_info += f"UV Index: {weather.ultraviolet}\n"
         return weather_info
+
 
 def voice_assistant(text):
     # Check if the text contains any mention of checking battery status
@@ -351,20 +357,21 @@ def voice_assistant(text):
         messages=[{"role": "user", "content": text}],
         stream=True,
     )
-    typed_text = ""  
+    typed_text = ""
     for chunk in stream:
         if chunk.choices[0].delta.content:
             response = chunk.choices[0].delta.content
             typed_text += response
             d.infobox(typed_text, width=sys_width, height=sys_height)
             time.sleep(0.05)
-    d.infobox(typed_text, width=sys_width, height=sys_height)  
-    time.sleep(4)     
+    d.infobox(typed_text, width=sys_width, height=sys_height)
+    time.sleep(4)
+
 
 def main():
     while True:
         try:
-            record_audio()           
+            record_audio()
             convert_to_wav(input_file_path, output_file_path)
             text = recognize_speech(output_file_path)
             d.infobox(f"You said: {text}")
@@ -373,7 +380,7 @@ def main():
             os.remove(input_file_path)
             response = voice_assistant(text)
             if response:
-                d.msgbox(f"Response: {response}")               
+                d.msgbox(f"Response: {response}")
 
         except Exception as e:
             print(f"Something went wrong.\nPlease try again.\nException Caught: {e}")
@@ -387,6 +394,7 @@ def main():
             response = voice_assistant(text)
             if response:
                 d.msgbox(f"Response: {response}")
+
 
 if __name__ == "__main__":
     main()
