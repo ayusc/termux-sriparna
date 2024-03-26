@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pkg update -y && pkg upgrade -y && pkg install termux-api -y &>/dev/null
+apt update -y && apt upgrade -y && apt install termux-api -y &>/dev/null
 
 # Workaround to check for Termux Api App Installation 
 if timeout 5 termux-api-start&&termux-toast "Working ..." &>/dev/null; then
@@ -16,7 +16,7 @@ fi
 packages=("termux-api" "python" "openssl" "libexpat" "ffmpeg" "flac" "dialog")
 
 install_package() {
-    pkg install -y $1 &>/dev/null
+    DEBIAN_FRONTEND=noninteractive apt install -y $1 &>/dev/null
 }
 
 for pkg in "${packages[@]}"; do
