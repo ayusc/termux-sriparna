@@ -37,7 +37,6 @@ echo
 mkdir -p ~/.termux/widget/dynamic_shortcuts
 mkdir -p /data/data/com.termux/files/home/.shortcuts
 chmod 700 -R /data/data/com.termux/files/home/.shortcuts
-cp sriparna.sh /data/data/com.termux/files/home/.shortcuts
 echo "sriparna" > /data/data/com.termux/files/home/.shortcuts/Sriparna
 echo "sriparna-gui" > /data/data/com.termux/files/home/.shortcuts/Sriparna-Gui
 chmod +x /data/data/com.termux/files/home/.shortcuts/Sriparna
