@@ -44,3 +44,5 @@ jobs:
           auto_fix: true
           pylint: true
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          eslint: true
+          prettier: true
