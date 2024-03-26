@@ -2,9 +2,10 @@
 
 ![logo](https://raw.githubusercontent.com/ayusc/termux-sriparna/main/logo.png)
 
-A voice assistant for Termux written in python using [Termux Api](https://wiki.termux.com/wiki/Termux:API)
-
+[![Pylint](https://github.com/ayusc/termux-sriparna/actions/workflows/pylint.yml/badge.svg?branch=main)](https://github.com/ayusc/termux-sriparna/actions/workflows/pylint.yml)
 [![Package Version](https://img.shields.io/pypi/v/termux-sriparna.svg)](https://pypi.python.org/pypi/termux-sriparna/)
+
+A voice assistant for Termux written in python using [Termux Api](https://wiki.termux.com/wiki/Termux:API)
 
 With sriparna you can:
 
