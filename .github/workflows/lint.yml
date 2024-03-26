@@ -43,3 +43,4 @@ jobs:
           oitnb: true
           auto_fix: true
           pylint: true
+          github_token: ${{ secrets.GITHUB_TOKEN }}
