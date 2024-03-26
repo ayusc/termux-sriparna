@@ -4,7 +4,7 @@ import subprocess
 import codecs 
 import os
 
-VERSION = '1.0.5'
+VERSION = '1.0.6'
 
 DESCRIPTION = 'A voice assistant for Termux written in python using Termux Api'
 
