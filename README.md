@@ -46,7 +46,7 @@ Do not use playstore version !!
 ##### Install using pypi
 
 ```
-pkg update && pkg upgrade -y
+pkg update -y && pkg upgrade -y
 pkg install python -y
 pip install -Uv termux-sriparna
 ```
@@ -84,7 +84,7 @@ For terminal version
 **or**
 
 ```
-python sriparna/sriparna.py 
+python sriparna/sriparna_gui.py 
 ```
 For gui version
 
@@ -96,17 +96,17 @@ For gui version
 
 Each command is assisted with a pattern type:
 
-##### To call any number you can say "hey sriparna call XXXXXXXXXX"
+##### To call any number you can say "please call XXXXXXXXXX"
 
-You can also include country code in your query "hey sriparna call plus(country code)******" it will read the number as "+(country code)number"
+You can also include country code in your query "hey call plus(country code)******" it will read the number as "+(country code)number"
 
-Besides you can call a number from your contact list just say "sriparna call ayus", "please call ayus2" etc...
+Besides you can call a number from your contact list just say "can you call ayus", "please call ayus2" etc...
 
-Note: In certain cases the speech recognition may not correctly identify the contact name. In such case it's better to spell the letters in the name individually. For example "sriparna please call a y u s", "call a y u s 2" etc...
+Note: In certain cases the speech recognition may not correctly identify the contact name. In such case it's better to spell the letters in the name individually. For example "please call a y u s", "call a y u s 2" etc...
 
-##### To check battery you can say "sriparna how much is my battery", "tell my battery percentage", "hello what is my battery status", "tell my battery health"
+##### To check battery you can say "how much is my battery", "tell my battery percentage", "hello what is my battery status", "tell my battery health"
 
-##### To open any application you can say "open whatsapp", "sriparna please open youtube" etc...
+##### To open any application you can say "open whatsapp", "can you open youtube" etc...
 
 You can open chrome, gmail, youtube and whatsapp with this, if you want more applications you need to specify their package names and class name in app.json
 
@@ -115,7 +115,7 @@ You can use [Shortcut Maker](https://play.google.com/store/apps/details?id=rk.an
 For pypi installation: You can directly edit the apps.json file with `vi /data/data/com.termux/files/usr/lib/python$(python -c 'import sys; print(sys.version_info[0])').$(python -c 'import sys; print(sys.version_info[1])')/site-packages/sriparna/apps.json
 `
 
-##### To check the current weather conditions you can "hi sriparna whats the weather alike", "tell me the weather forecast", "what is the current weather condition", "how is the weather today"
+##### To check the current weather conditions you can "hi whats the weather alike", "tell me the weather forecast", "what is the current weather condition", "how is the weather today"
 
 ##### To turn on flashlight you can say "hey please turn on the flash/torch", "flash/torch on", similarly you can say "hey please turn off the flash/torch", "flash/torch off" to turn it off.
 
