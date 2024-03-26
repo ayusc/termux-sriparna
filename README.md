@@ -88,6 +88,10 @@ python sriparna/sriparna.py
 ```
 For gui version
 
+**How to setup shortcut application ?**
+
+![widget](https://raw.githubusercontent.com/ayusc/termux-sriparna/main/demo/widget.gif)
+
 ## Commands
 
 Each command is assisted with a pattern type:
