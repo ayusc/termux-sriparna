@@ -4,6 +4,8 @@
 
 A voice assistant for Termux written in python using [Termux Api](https://wiki.termux.com/wiki/Termux:API)
 
+[![Package Version](https://img.shields.io/pypi/v/termux-sriparna.svg)](https://pypi.python.org/pypi/termux-sriparna/)
+
 With sriparna you can:
 
 1) Call any number ✅
