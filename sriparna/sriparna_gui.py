@@ -3,7 +3,8 @@
 
 # This source code is licensed under the GPL-3.0 license found in the
 # LICENSE file in the root directory of this source tree.
-# If you don't have the source tree alternately this file can be found at <https://github.com/ayusc/termux-sriparna>
+# If you don't have the source tree alternately this file can be found at
+# <https://github.com/ayusc/termux-sriparna>
 
 import os
 import re
@@ -26,7 +27,8 @@ import dialog
 
 g4f.debug.logging = False
 
-client = Client(provider=RetryProvider([ChatgptAi, OpenaiChat, Bing], shuffle=False))
+client = Client(provider=RetryProvider(
+    [ChatgptAi, OpenaiChat, Bing], shuffle=False))
 
 
 def load_app_mappings(filename):
@@ -39,8 +41,7 @@ def load_app_mappings(filename):
 
 python_version = "{}.{}".format(sys.version_info.major, sys.version_info.minor)
 appjson_path = "/data/data/com.termux/files/usr/lib/python{}/site-packages/sriparna/apps.json".format(
-    python_version
-)
+    python_version)
 
 # Check if the given path exists, if not, fallback to using "apps.json"
 if os.path.exists(appjson_path):
@@ -50,8 +51,11 @@ else:
 
 # Generate random 5-character strings for input and output file paths
 random_chars = "".join(
-    random.choices(string.ascii_letters + string.digits + string.punctuation, k=5)
-)
+    random.choices(
+        string.ascii_letters +
+        string.digits +
+        string.punctuation,
+        k=5))
 input_file_path = f"/data/data/com.termux/files/home/{random_chars}.amr"
 output_file_path = f"/data/data/com.termux/files/home/{random_chars}.wav"
 
@@ -105,9 +109,8 @@ def record_audio():
                 no_collapse=True,
             )
             if code == d.OK:
-                subprocess.run(
-                    ["termux-microphone-record", "-q"], stdout=subprocess.DEVNULL
-                )
+                subprocess.run(["termux-microphone-record",
+                                "-q"], stdout=subprocess.DEVNULL)
                 d.infobox("Recording finished.")
                 time.sleep(1)
                 d.infobox("Working on it ...")
@@ -230,21 +233,23 @@ def voice_assistant(text):
     for app, intent in app_mappings.items():
         if f"open {app.lower()}" in text.lower():
             # Search for the app and open it if found
-            subprocess.run(["am", "start", "-n", intent], stdout=subprocess.DEVNULL)
+            subprocess.run(["am", "start", "-n", intent],
+                           stdout=subprocess.DEVNULL)
             return f"Opening {app}"
 
     # Check if the text contains a command to call a mobile number
     call_pattern = r"call\s*(\+?\s*\d+(?:\s*\d+)*)"
     match = re.search(call_pattern, text.lower())
     if match:
-        number = match.group(1).replace(" ", "")  # Remove spaces from the number
+        number = match.group(1).replace(
+            " ", "")  # Remove spaces from the number
         if "plus" in text.lower():
-            subprocess.run(
-                ["termux-telephony-call", f"+{number}"], stdout=subprocess.DEVNULL
-            )
+            subprocess.run(["termux-telephony-call",
+                            f"+{number}"], stdout=subprocess.DEVNULL)
             return f"Calling {number}"
         else:
-            subprocess.run(["termux-telephony-call", number], stdout=subprocess.DEVNULL)
+            subprocess.run(["termux-telephony-call", number],
+                           stdout=subprocess.DEVNULL)
             return f"Calling {number}"
 
     # Check if the text contains a command to call a contact
@@ -258,9 +263,8 @@ def voice_assistant(text):
         for contact_name in contact_info.keys():
             if name == contact_name:
                 number = contact_info[contact_name]
-                subprocess.run(
-                    ["termux-telephony-call", number], stdout=subprocess.DEVNULL
-                )
+                subprocess.run(["termux-telephony-call", number],
+                               stdout=subprocess.DEVNULL)
                 return f"Calling {name}"
         return f"No contact found with name {name}"
 
@@ -321,12 +325,14 @@ def voice_assistant(text):
             # Get current time
             current_time = datetime.now(local_timezone)
             # Format the current date
-            formatted_date = current_time.strftime("Today's date is: %B %d, %Y (%A)")
+            formatted_date = current_time.strftime(
+                "Today's date is: %B %d, %Y (%A)")
             return formatted_date
         except Exception:
             return "Sorry, I couldn't fetch the local date."
 
-    # Check if the text contains any type of query asking about the current weather conditions
+    # Check if the text contains any type of query asking about the current
+    # weather conditions
     if any(
         keyword in text.lower()
         for keyword in [
@@ -347,7 +353,9 @@ def voice_assistant(text):
             longitude = gps_json.get("longitude")
             if latitude and longitude:
                 # Get weather information from coordinates
-                return asyncio.run(get_weather_from_coordinates(latitude, longitude))
+                return asyncio.run(
+                    get_weather_from_coordinates(
+                        latitude, longitude))
 
         except subprocess.TimeoutExpired:
             return "Unable to fetch GPS coordinates. Is your location turned off ?"
@@ -383,7 +391,8 @@ def main():
                 d.msgbox(f"Response: {response}")
 
         except Exception as e:
-            print(f"Something went wrong.\nPlease try again.\nException Caught: {e}")
+            print(
+                f"Something went wrong.\nPlease try again.\nException Caught: {e}")
             record_audio()
             convert_to_wav(input_file_path, output_file_path)
             text = recognize_speech(output_file_path)
