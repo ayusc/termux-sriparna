@@ -15,7 +15,11 @@ fi
 # List of packages to install
 packages=("termux-api" "python" "openssl" "libexpat" "ffmpeg" "flac" "dialog")
 
+# Hack to bypass dpkg lock
+yes no | dpkg --configure -a 
+
 install_package() {
+    # Hack pass default 'N' to userinput
     DEBIAN_FRONTEND=noninteractive apt install -y $1 &>/dev/null
 }
 
