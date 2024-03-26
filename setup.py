@@ -8,16 +8,15 @@ VERSION = '1.0.5'
 
 DESCRIPTION = 'A voice assistant for Termux written in python using Termux Api'
 
+with open('requirements.txt') as f:
+    requirements = f.read().splitlines()
+
 with codecs.open(os.path.join(os.path.abspath(os.path.dirname(__file__)), "README.md"), encoding="utf-8") as fh:
     LONG_DESCRIPTION = "\n" + fh.read()
-
-with codecs.open(os.path.join(os.path.abspath(os.path.dirname(__file__)), "requirements.txt"), encoding="utf-8") as f:
-    requirements = f.read().splitlines()
     
-class PostInstall(install):
+class CustomInstall(install):
     def run(self):
-        with codecs.open(os.path.join(os.path.abspath(os.path.dirname(__file__)), "setup.sh"), encoding="utf-8") as f:
-             os.system(f"bash {f}")
+        subprocess.check_call("bash setup.sh", shell=True)
         install.run(self)
         
 setup(
@@ -30,7 +29,7 @@ setup(
     packages=find_packages(),
     package_data={'sriparna': ['apps.json']},
     include_package_data=True,
-    cmdclass={'install': PostInstall},
+    cmdclass={'install': CustomInstall},
     install_requires=requirements,
     keywords=[
         'python',
