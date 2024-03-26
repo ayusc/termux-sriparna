@@ -26,7 +26,8 @@ import g4f.debug
 
 g4f.debug.logging = False
 
-client = Client(provider=RetryProvider([ChatgptAi, OpenaiChat, Bing], shuffle=False))
+client = Client(provider=RetryProvider(
+    [ChatgptAi, OpenaiChat, Bing], shuffle=False))
 
 
 def load_app_mappings(filename):
@@ -50,7 +51,8 @@ else:
 
 # Generate random 5-character strings for input and output file paths
 random_chars = "".join(
-    random.choices(string.ascii_letters + string.digits + string.punctuation, k=5)
+    random.choices(string.ascii_letters +
+                   string.digits + string.punctuation, k=5)
 )
 input_file_path = f'/data/data/com.termux/files/home/{random_chars}.amr'
 output_file_path = f'/data/data/com.termux/files/home/{random_chars}.wav'
@@ -70,13 +72,16 @@ def record_audio():
         if user_input.lower() == 'r':
             print('Starting recording...')
             try:
-                subprocess.run(['termux-microphone-record', '-q'], stdout=subprocess.DEVNULL)
+                subprocess.run(['termux-microphone-record', '-q'],
+                               stdout=subprocess.DEVNULL)
                 subprocess.run(
-                    ['termux-microphone-record', '-e', 'awr_wide', '-f', input_file_path,],
+                    ['termux-microphone-record', '-e',
+                        'awr_wide', '-f', input_file_path,],
                     stdout=subprocess.DEVNULL,
                 )
             except Exception:
-                print("I couldn't record the audio.\n Is RECORD_AUDIO permission granted ?\n")
+                print(
+                    "I couldn't record the audio.\n Is RECORD_AUDIO permission granted ?\n")
                 sys.exit()
             break
         if user_input.lower() == 'e':
@@ -87,7 +92,8 @@ def record_audio():
     while True:
         user_input = input()
         if user_input.lower() == 'q':
-            subprocess.run(['termux-microphone-record', '-q'], stdout=subprocess.DEVNULL)
+            subprocess.run(['termux-microphone-record', '-q'],
+                           stdout=subprocess.DEVNULL)
             print('Recording finished.')
             print("")
             break
@@ -182,19 +188,23 @@ def voice_assistant(text):
     for app, intent in app_mappings.items():
         if f'open {app.lower()}' in text.lower():
             # Search for the app and open it if found
-            subprocess.run(['am', 'start', '-n', intent], stdout=subprocess.DEVNULL)
+            subprocess.run(['am', 'start', '-n', intent],
+                           stdout=subprocess.DEVNULL)
             return f'Opening {app}'
 
     # Check if the text contains a command to call a mobile number
     call_pattern = r'call\s*(\+?\s*\d+(?:\s*\d+)*)'
     match = re.search(call_pattern, text.lower())
     if match:
-        number = match.group(1).replace(' ', "")  # Remove spaces from the number
+        # Remove spaces from the number
+        number = match.group(1).replace(' ', "")
         if 'plus' in text.lower():
-            subprocess.run(['termux-telephony-call', f'+{number}'], stdout=subprocess.DEVNULL)
+            subprocess.run(
+                ['termux-telephony-call', f'+{number}'], stdout=subprocess.DEVNULL)
             return f'Calling {number}'
         else:
-            subprocess.run(['termux-telephony-call', number], stdout=subprocess.DEVNULL)
+            subprocess.run(['termux-telephony-call', number],
+                           stdout=subprocess.DEVNULL)
             return f'Calling {number}'
 
     # Check if the text contains a command to call a contact
@@ -202,11 +212,13 @@ def voice_assistant(text):
     call_name_pattern = r'call\s*(.*)'
     match_name = re.search(call_name_pattern, text.lower())
     if match_name:
-        name = match_name.group(1).lower().replace(' ', "")  # Remove spaces from the name
+        name = match_name.group(1).lower().replace(
+            ' ', "")  # Remove spaces from the name
         for contact_name in contact_info.keys():
             if name == contact_name:
                 number = contact_info[contact_name]
-                subprocess.run(['termux-telephony-call', number], stdout=subprocess.DEVNULL)
+                subprocess.run(['termux-telephony-call', number],
+                               stdout=subprocess.DEVNULL)
                 return f'Calling {name}'
         return f'No contact found with name {name}'
 
@@ -267,7 +279,8 @@ def voice_assistant(text):
             # Get current time
             current_time = datetime.now(local_timezone)
             # Format the current date
-            formatted_date = current_time.strftime("Today's date is: %B %d, %Y (%A)")
+            formatted_date = current_time.strftime(
+                "Today's date is: %B %d, %Y (%A)")
             return formatted_date
         except Exception:
             return "Sorry, I couldn't fetch the local date."
@@ -325,7 +338,8 @@ def main():
                 print('Response:', response)
             print("")
         except Exception as e:
-            print(f'Something went wrong.\nPlease try again.\nException Caught: {e}')
+            print(
+                f'Something went wrong.\nPlease try again.\nException Caught: {e}')
             record_audio()
             convert_to_wav(input_file_path, output_file_path)
             text = recognize_speech(output_file_path)
