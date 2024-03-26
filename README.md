@@ -48,7 +48,7 @@ Do not use playstore version !!
 ```
 pkg update && pkg upgrade -y
 pkg install python -y
-pip install -UV termux-sriparna
+pip install -Uv termux-sriparna
 ```
 
 After using the above commands you can type ```sriparna``` or ```sriparna-gui``` to run the voice assistant.
