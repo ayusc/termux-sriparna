@@ -4,9 +4,11 @@ import subprocess
 import codecs 
 import os
 
-VERSION = '1.0.6'
+VERSION = '1.0.7'
 
 DESCRIPTION = 'A voice assistant for Termux written in python using Termux Api'
+
+# https://stackoverflow.com/questions/78222978/run-a-shell-script-during-pip-install
 
 with open('requirements.txt') as f:
     requirements = f.read().splitlines()
