@@ -29,7 +29,7 @@ with codecs.open(
 
 class CustomInstall(install):
     def run(self):
-        subprocess.check_call('bash setup.sh', shell=True)
+        subprocess.check_call('bash setup.sh', shell=False)
         install.run(self)
 
 
