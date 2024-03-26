@@ -48,8 +48,7 @@ Do not use playstore version !!
 ```
 pkg update && pkg upgrade -y
 pkg install python -y
-curl -sSL https://raw.githubusercontent.com/ayusc/termux-sriparna/main/setup.sh | bash
-pip install -U termux-sriparna
+pip install -UV termux-sriparna
 ```
 
 After using the above commands you can type ```sriparna``` or ```sriparna-gui``` to run the voice assistant.
