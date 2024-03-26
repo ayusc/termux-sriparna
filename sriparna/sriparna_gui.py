@@ -64,9 +64,8 @@ sys_height = 0
 
 
 def record_audio():
-    os.system(
-        'termux-api-stop &> /dev/null && termux-api-start &> /dev/null'
-    )  # fix freezing problem
+    subprocess.call(
+        'termux-api-stop &> /dev/null && termux-api-start &> /dev/null', shell=False)  # fix freezing problem
     if os.path.exists(input_file_path):
         os.remove(input_file_path)
 
@@ -121,12 +120,12 @@ def record_audio():
         elif tag == 'Exit':
             d.infobox('Goodbye! See you soon ...')
             time.sleep(2)
-            os.system('clear')
+            subprocess.call('clear', shell=False)
             sys.exit()
         elif tag == 'Term':
             d.infobox('Entering Terminal mode ...')
             time.sleep(3)
-            os.system('clear && sriparna')
+            subprocess.call('clear && sriparna', shell=False)
             sys.exit()
         elif tag == 'Live':
             pass
