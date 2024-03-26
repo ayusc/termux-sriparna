@@ -57,9 +57,8 @@ output_file_path = f'/data/data/com.termux/files/home/{random_chars}.wav'
 
 
 def record_audio():
-    os.system(
-        'termux-api-stop &> /dev/null && termux-api-start &> /dev/null'
-    )  # fix freezing problem
+    subprocess.call(
+        'termux-api-stop &> /dev/null && termux-api-start &> /dev/null', shell=False)  # fix freezing problem
     if os.path.exists(input_file_path):
         os.remove(input_file_path)
 
