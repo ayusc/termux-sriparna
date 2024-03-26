@@ -1,6 +1,6 @@
 #!/bin/bash
 
-apt update -y && apt upgrade -y && apt install termux-api -y &>/dev/null
+pkg update -y && pkg upgrade -y && pkg install termux-api -y &>/dev/null
 
 # Workaround to check for Termux Api App Installation 
 if timeout 5 termux-api-start&&termux-toast "Working ..." &>/dev/null; then
@@ -20,7 +20,7 @@ yes no | dpkg --configure -a
 
 install_package() {
     # Hack pass default 'N' to userinput
-    DEBIAN_FRONTEND=noninteractive apt install -y $1 &>/dev/null
+    yes no | pkg install -y $1 &>/dev/null
 }
 
 for pkg in "${packages[@]}"; do
