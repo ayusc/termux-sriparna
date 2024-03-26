@@ -98,7 +98,8 @@ def record_audio():
                 ["termux-microphone-record", "-q"], stdout=subprocess.DEVNULL
             )
             subprocess.run(
-                ["termux-microphone-record", "-e", "awr_wide", "-f", input_file_path],
+                ["termux-microphone-record", "-e",
+                    "awr_wide", "-f", input_file_path],
                 stdout=subprocess.DEVNULL,
             )
 
