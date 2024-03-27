@@ -73,7 +73,9 @@ def record_audio():
             print("Starting recording...")
             try:
                 subprocess.run(
-                    ["termux-microphone-record", "-q"], stdout=subprocess.DEVNULL,check=True,
+                    ["termux-microphone-record", "-q"],
+                    stdout=subprocess.DEVNULL,
+                    check=True,
                 )
                 subprocess.run(
                     [
@@ -83,7 +85,8 @@ def record_audio():
                         "-f",
                         input_file_path,
                     ],
-                    stdout=subprocess.DEVNULL,check=True,
+                    stdout=subprocess.DEVNULL,
+                    check=True,
                 )
             except Exception:
                 print(
@@ -100,7 +103,9 @@ def record_audio():
         user_input = input()
         if user_input.lower() == "q":
             subprocess.run(
-                ["termux-microphone-record", "-q"], stdout=subprocess.DEVNULL,check=True,
+                ["termux-microphone-record", "-q"],
+                stdout=subprocess.DEVNULL,
+                check=True,
             )
             print("Recording finished.")
             print("")
@@ -123,7 +128,8 @@ def convert_to_wav(input_file, output_file):
             "-y",
             "-loglevel",
             "quiet",
-        ],check=True,
+        ],
+        check=True,
     )
 
 
@@ -196,7 +202,9 @@ def voice_assistant(text):
     for app, intent in app_mappings.items():
         if f"open {app.lower()}" in text.lower():
             # Search for the app and open it if found
-            subprocess.run(["am", "start", "-n", intent], stdout=subprocess.DEVNULL,check=True)
+            subprocess.run(
+                ["am", "start", "-n", intent], stdout=subprocess.DEVNULL, check=True
+            )
             return f"Opening {app}"
 
     # Check if the text contains a command to call a mobile number
@@ -207,11 +215,15 @@ def voice_assistant(text):
         number = match.group(1).replace(" ", "")
         if "plus" in text.lower():
             subprocess.run(
-                ["termux-telephony-call", f"+{number}"], stdout=subprocess.DEVNULL,check=True,
+                ["termux-telephony-call", f"+{number}"],
+                stdout=subprocess.DEVNULL,
+                check=True,
             )
             return f"Calling {number}"
         else:
-            subprocess.run(["termux-telephony-call", number], stdout=subprocess.DEVNULL,check=True)
+            subprocess.run(
+                ["termux-telephony-call", number], stdout=subprocess.DEVNULL, check=True
+            )
             return f"Calling {number}"
 
     # Check if the text contains a command to call a contact
@@ -226,7 +238,9 @@ def voice_assistant(text):
             if name == contact_name:
                 number = contact_info[contact_name]
                 subprocess.run(
-                    ["termux-telephony-call", number], stdout=subprocess.DEVNULL,check=True,
+                    ["termux-telephony-call", number],
+                    stdout=subprocess.DEVNULL,
+                    check=True,
                 )
                 return f"Calling {name}"
         return f"No contact found with name {name}"
@@ -237,7 +251,7 @@ def voice_assistant(text):
         or "on the flash" in text.lower()
         or "on the torch" in text.lower()
     ):
-        subprocess.run(["termux-torch", "on"],check=True)
+        subprocess.run(["termux-torch", "on"], check=True)
         return "Flashlight turned on."
     elif (
         "flash off" in text.lower()
@@ -245,7 +259,7 @@ def voice_assistant(text):
         or "off the flash" in text.lower()
         or "off the torch" in text.lower()
     ):
-        subprocess.run(["termux-torch", "off"],check=True)
+        subprocess.run(["termux-torch", "off"], check=True)
         return "Flashlight turned off."
 
     # Check if the text contains any queries regarding current time
