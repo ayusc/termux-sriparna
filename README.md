@@ -6,6 +6,7 @@
 [![CodeQL](https://github.com/ayusc/termux-sriparna/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/ayusc/termux-sriparna/actions/workflows/github-code-scanning/codeql)
 [![CodeFactor](https://www.codefactor.io/repository/github/ayusc/termux-sriparna/badge)](https://www.codefactor.io/repository/github/ayusc/termux-sriparna)
 [![Package Version](https://img.shields.io/pypi/v/termux-sriparna.svg)](https://pypi.python.org/pypi/termux-sriparna/)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 A voice assistant for Termux written in python using [Termux Api](https://wiki.termux.com/wiki/Termux:API)
 
