@@ -25,8 +25,8 @@ jobs:
           python-version: 3.11
 
       - name: Install Python dependencies
-        run: pip install black flake8 
-
+        run: pip install black 
+    
       - name: Lint Action
         uses: wearerequired/lint-action@v2.3.0
             
@@ -34,6 +34,4 @@ jobs:
           auto_fix: true
           black: true
           black_auto_fix: true
-          flake8: true
-          flake8_auto_fix: true
           github_token: ${{ secrets.GITHUB_TOKEN }}
