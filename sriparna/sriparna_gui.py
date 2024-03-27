@@ -197,8 +197,8 @@ async def get_weather_from_coordinates(latitude, longitude):
     location = geolocator.reverse((latitude, longitude))
     # print(location.address)
     city = location.address.split(",")[0]
-    async with python_weather.Client() as client:
-        weather = await client.get(city)
+    async with python_weather.Client() as weather_client:
+        weather = await weather_client.get(city)
         weather_info = f"Current weather in {city} is:\n\n"
         weather_info += f"Type: {weather.kind} {weather.kind.emoji}\n"
         weather_info += f"Temperature: {weather.temperature}°C\n"
