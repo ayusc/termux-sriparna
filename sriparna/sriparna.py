@@ -245,7 +245,7 @@ def voice_assistant(text):
         or "off the flash" in text.lower()
         or "off the torch" in text.lower()
     ):
-        subprocess.run(["termux-torch", "off"], ,check=True)
+        subprocess.run(["termux-torch", "off"],check=True)
         return "Flashlight turned off."
 
     # Check if the text contains any queries regarding current time
