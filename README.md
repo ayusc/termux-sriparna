@@ -3,6 +3,7 @@
 ![logo](https://raw.githubusercontent.com/ayusc/termux-sriparna/main/logo.png)
 
 [![Pylint](https://github.com/ayusc/termux-sriparna/actions/workflows/pylint.yml/badge.svg?branch=main)](https://github.com/ayusc/termux-sriparna/actions/workflows/pylint.yml)
+[![CodeQL](https://github.com/ayusc/termux-sriparna/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/ayusc/termux-sriparna/actions/workflows/github-code-scanning/codeql)
 [![CodeFactor](https://www.codefactor.io/repository/github/ayusc/termux-sriparna/badge)](https://www.codefactor.io/repository/github/ayusc/termux-sriparna)
 [![Package Version](https://img.shields.io/pypi/v/termux-sriparna.svg)](https://pypi.python.org/pypi/termux-sriparna/)
 
