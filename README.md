@@ -5,6 +5,7 @@
 [![Pylint](https://github.com/ayusc/termux-sriparna/actions/workflows/pylint.yml/badge.svg?branch=main)](https://github.com/ayusc/termux-sriparna/actions/workflows/pylint.yml)
 [![CodeQL](https://github.com/ayusc/termux-sriparna/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/ayusc/termux-sriparna/actions/workflows/github-code-scanning/codeql)
 [![CodeFactor](https://www.codefactor.io/repository/github/ayusc/termux-sriparna/badge)](https://www.codefactor.io/repository/github/ayusc/termux-sriparna)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/ce3bdaaca6014fc5b74bb171e8517b48)](https://app.codacy.com/gh/ayusc/termux-sriparna/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 [![Package Version](https://img.shields.io/pypi/v/termux-sriparna.svg)](https://pypi.python.org/pypi/termux-sriparna/)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
