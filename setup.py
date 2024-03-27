@@ -18,7 +18,7 @@ DESCRIPTION = "A voice assistant for Termux written in python using Termux Api"
 
 # https://stackoverflow.com/questions/78222978/run-a-shell-script-during-pip-install
 
-with open("requirements.txt") as f:
+with open("requirements.txt", encoding="utf-8") as f:
     requirements = f.read().splitlines()
 
 with codecs.open(
