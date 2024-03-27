@@ -2,6 +2,7 @@
 
 ![logo](https://raw.githubusercontent.com/ayusc/termux-sriparna/main/logo.png)
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/a27acd764773458c892510de6a8de8a7)](https://app.codacy.com/gh/ayusc/termux-sriparna?utm_source=github.com&utm_medium=referral&utm_content=ayusc/termux-sriparna&utm_campaign=Badge_Grade)
 [![Pylint](https://github.com/ayusc/termux-sriparna/actions/workflows/pylint.yml/badge.svg?branch=main)](https://github.com/ayusc/termux-sriparna/actions/workflows/pylint.yml)
 [![CodeQL](https://github.com/ayusc/termux-sriparna/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/ayusc/termux-sriparna/actions/workflows/github-code-scanning/codeql)
 [![CodeFactor](https://www.codefactor.io/repository/github/ayusc/termux-sriparna/badge)](https://www.codefactor.io/repository/github/ayusc/termux-sriparna)
