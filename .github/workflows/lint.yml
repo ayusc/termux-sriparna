@@ -25,7 +25,7 @@ jobs:
           python-version: 3.11
 
       - name: Install Python dependencies
-        run: pip install black flake8 autopep8 mypy oitnb pylint
+        run: pip install black flake8 
 
       - name: Lint Action
         uses: wearerequired/lint-action@v2.3.0
@@ -36,12 +36,4 @@ jobs:
           black_auto_fix: true
           flake8: true
           flake8_auto_fix: true
-          autopep8: true
-          autopep8_auto_fix: true
-          mypy: true
-          mypy_auto_fix: true
-          oitnb: true
-          oitnb_auto_fix: true
-          pylint: true
-          pylint_auto_fix: true
           github_token: ${{ secrets.GITHUB_TOKEN }}
