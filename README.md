@@ -45,7 +45,7 @@ It motivates me to keep continue the project.
 
 Note: Download these apps from the following official links only.
 
-# Note: With the current Termux-Api release there is a issue with the api commands being freezing at terminal [see the issue here](https://github.com/termux/termux-api/issues/640), so you may need to wait for next release from Fdroid or download the debug builds from [here](https://github.com/termux/termux-api/actions)
+#### Note: With the current Termux-Api release there is a issue with the api commands being freezing at terminal [see the issue here](https://github.com/termux/termux-api/issues/640), so you may need to wait for next release from Fdroid or download the debug builds from [here](https://github.com/termux/termux-api/actions)
 
 Do not use playstore version !!
 
