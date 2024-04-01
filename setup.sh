@@ -56,7 +56,7 @@ cp /data/data/com.termux/files/home/.shortcuts/Sriparna ~/.termux/widget/dynamic
 cp /data/data/com.termux/files/home/.shortcuts/Sriparna-Gui ~/.termux/widget/dynamic_shortcuts
 echo
 echo -e "Shortcut widget is created!\nLong click on Termux:Widget app and select Termux shortcut\nThere you will get two scripts, drag them to your homescreen\nYou can directly run these scripts by clicking on them !"
-echo "Fine, widget will not be created !"
 echo
 echo "Setup script is successful !"
 echo 
+sleep 5
