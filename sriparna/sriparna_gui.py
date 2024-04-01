@@ -400,7 +400,7 @@ def main():
                 d.msgbox(f"Response: {response}")
 
         except Exception as e:
-            print(f"Something went wrong.\nPlease try again.\nException Caught: {e}")
+            d.msgbox(f"Something went wrong.\nPlease try again.\nException Caught: {e}")
             record_audio()
             convert_to_wav(input_file_path, output_file_path)
             text = recognize_speech(output_file_path)
