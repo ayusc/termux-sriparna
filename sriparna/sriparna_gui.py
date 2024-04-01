@@ -65,7 +65,7 @@ sys_height = 0
 
 def record_audio():
     subprocess.call(
-        "termux-api-stop &> /dev/null && termux-api-start &> /dev/null", shell=False
+        "termux-api-start &> /dev/null", shell=False
     )  # fix freezing problem
     if os.path.exists(input_file_path):
         os.remove(input_file_path)
