@@ -43,9 +43,9 @@ It motivates me to keep continue the project.
 
 • [Termux-Widget](https://github.com/termux/termux-widget/actions) (Optional: For shortcut application)
 
-Note: Download these apps from their official github builds only.
+Note: Download these apps from their official github builds only (as many issues are already fixed there)
 
-Do not use playstore or Fdroid version !!
+Do not use playstore or Fdroid version !! 
 
 **Please grant all permission to Termux-api and disable battery optimisation for the app beforehand.** 
 
