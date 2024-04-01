@@ -227,10 +227,10 @@ def voice_assistant(text):
             return f"Calling {number}"
 
     # Check if the text contains a command to call a contact
-    contact_info = get_contact_info()
     call_name_pattern = r"call\s*(.*)"
     match_name = re.search(call_name_pattern, text.lower())
     if match_name:
+        contact_info = get_contact_info()
         name = (
             match_name.group(1).lower().replace(" ", "")
         )  # Remove spaces from the name
