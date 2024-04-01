@@ -37,17 +37,15 @@ It motivates me to keep continue the project.
 
 ## Requirements:
 
-• [Termux](https://f-droid.org/en/packages/com.termux/)
+• [Termux](https://github.com/termux/termux-app/actions)
 
-• [Termux-Api](https://f-droid.org/en/packages/com.termux.api/)
+• [Termux-Api](https://github.com/termux/termux-api/actions)
 
-• [Termux-Widget](https://f-droid.org/en/packages/com.termux.widget/) (Optional: For shortcut application)
+• [Termux-Widget](https://github.com/termux/termux-widget/actions) (Optional: For shortcut application)
 
-Note: Download these apps from the following official links only.
+Note: Download these apps from their official github builds only.
 
-#### Note: With the current Termux-Api release there is a issue with the api commands being freezing at terminal [see the issue here](https://github.com/termux/termux-api/issues/640), so you may need to wait for next release from Fdroid or download the debug builds from [here](https://github.com/termux/termux-api/actions)
-
-Do not use playstore version !!
+Do not use playstore or Fdroid version !!
 
 **Please grant all permission to Termux-api and disable battery optimisation for the app beforehand.** 
 
